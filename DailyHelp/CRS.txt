@@ -1,0 +1,9 @@
+cd /oracle/product/grid_home/bin/
+./crsctl check crs 
+
+cd /oracle/product/grid_home1/bin/
+./crsctl check crs 
+
+sudo ./crsctl check crs 
+sudo ./crsctl stop crs -f
+sudo ./crsctl start crs

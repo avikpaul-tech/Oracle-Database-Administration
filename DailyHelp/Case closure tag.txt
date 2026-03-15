@@ -1,0 +1,15 @@
+------------Keywords to be used for Case Closure ##Closure Tag###########-------------------------------
+Tool Used
+Tool Issue
+Manual Support
+L3 Worked
+No Action from DBA
+Oracle SR Support
+
+
+
+While closing case please mention Resolution answer and follow below format to close.
+1.Tools Used : NA (Reason why tool not required or used.)/ Tool link
+2.Issue Analysis : NA / Describe what was checked or analyzed reg the issue.
+3. Action Taken / Fix Implemented for the Issue :Detail fix of issue.
+4.Were L3/SME involved? If so, mention reason.

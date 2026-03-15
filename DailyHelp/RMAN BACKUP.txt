@@ -1,0 +1,39 @@
+RMAN BACKUP STATUS
+==================
+set linesize 600 pagesize 2000
+col Hours format 9999.99
+col STATUS format a30
+select * from(select SESSION_KEY, INPUT_TYPE, STATUS,
+to_char(START_TIME,'mm-dd-yyyy hh24:mi:ss') as RMAN_Bkup_start_time,
+to_char(END_TIME,'mm-dd-yyyy hh24:mi:ss') as RMAN_Bkup_end_time,
+elapsed_seconds/3600 Hours from V$RMAN_BACKUP_JOB_DETAILS order by session_key desc ) where rownum <=50;
+
+NUMBER OF BACKED UP DATAFILES
+=============================
+grep -i "input datafile file" /var/log/rman/ZG2CPRD_db/2023.02.18_02.46.31.rman|uniq |wc -l
+
+VALIDATE RMAN LOG FILE
+======================
+cat <log file name>|grep -i error
+
+
+RMAN BACKUP ERROR:ORA-00245: control file backup failed; in Oracle RAC, target might not be on shared storage
+-------------------------------------------------------------------------------------------------------------
+CONFIGURE SNAPSHOT CONTROLFILE NAME TO '/oracle/config/ZENG01/snapcf_ZENG011.f'; # default
+
+
+
+rman target / catalog rman_crmprd/Wn5a_K_82N@rcatprod
+
+
+change controlfilecopy '/usr/tools/oracle/ZCRMPRD/control_backup.ctl' uncatalog;
+
+catalog controlfilecopy '/usr/tools/oracle/ZCRMPRD/control_backup.ctl';
+
+
+rman target / catalog rman_zg2cprd/rms4scat_rman@rcatprod log='/tmp/resync.log' debug trace='/tmp/resync.trc'
+
+rms4scat_rman
+
+rman target / catalog rman_cafi1prd/T_4dQx28C_@rcatprod
+catalog controlfilecopy '+DG_G2CPRD_AR/dbbs/control_standby.ctl';

@@ -1,0 +1,1673 @@
+Using username "avikpau".
+Pre-authentication banner message from server:
+|
+|                                  WARNING!!!
+|                     READ THIS BEFORE ATTEMPTING TO LOGON
+|
+|       This System is for the use of authorized users only.  Individuals
+|       using this computer without authority, or in excess of their
+|       authority, are subject to having all of their activities on this
+|       system monitored and recorded by system personnel.  In the course
+|       of monitoring individuals improperly using this system, or in the
+|       course of system maintenance, the activities of authorized users
+|       may also be monitored.  Anyone using this system expressly
+|       consents to such monitoring and is advised that if such
+|       monitoring reveals possible criminal activity, system personnel
+|       may provide the evidence of such monitoring to law enforcement
+|       officials.
+|
+|       Cisco Acceptable Use Policy:
+|       http://wwwin.cisco.com/c/cec/organizations/security-trust/infosec/polic
+> ies.html
+|
+|         ===========================================================
+|               NOTE: SSH ON THIS DEVICE USES DUO
+|                     1. Enter CEC Password at Password prompt
+|                     2. Authenticate using DUO
+|               FAQ: https://unixauth.cisco.com
+|         ===========================================================
+|
+End of banner message from server
+Keyboard-interactive authentication prompts from server:
+| Cisco AD password:
+Using username "avikpau".
+Pre-authentication banner message from server:
+|
+|                                  WARNING!!!
+|                     READ THIS BEFORE ATTEMPTING TO LOGON
+|
+|       This System is for the use of authorized users only.  Individuals
+|       using this computer without authority, or in excess of their
+|       authority, are subject to having all of their activities on this
+|       system monitored and recorded by system personnel.  In the course
+|       of monitoring individuals improperly using this system, or in the
+|       course of system maintenance, the activities of authorized users
+|       may also be monitored.  Anyone using this system expressly
+|       consents to such monitoring and is advised that if such
+|       monitoring reveals possible criminal activity, system personnel
+|       may provide the evidence of such monitoring to law enforcement
+|       officials.
+|
+|       Cisco Acceptable Use Policy:
+|       http://wwwin.cisco.com/c/cec/organizations/security-trust/infosec/polic
+> ies.html
+|
+|         ===========================================================
+|               NOTE: SSH ON THIS DEVICE USES DUO
+|                     1. Enter CEC Password at Password prompt
+|                     2. Authenticate using DUO
+|               FAQ: https://unixauth.cisco.com
+|         ===========================================================
+|
+End of banner message from server
+Keyboard-interactive authentication prompts from server:
+| Cisco AD password:
+| Duo two-factor login for avikpau
+|
+| Enter a passcode or select one of the following options:
+|
+|  1. Duo Push to +XX XXXXX X4145
+|
+| Passcode or option (1-1):
+End of keyboard-interactive prompts from server
+Success. Logging you in...
+Last login: Fri Mar 29 11:24:32 2024 from 10.110.201.37
+
+        ----------------------------------------------------------
+                                .:|:.:|:.
+                                  CISCO
+                           IT Managed Jump Host
+
+            NOTICE: The contents of your home directory will
+            not be saved after logging out of this Jump Host.
+        ----------------------------------------------------------
+
+[avikpau@jmp-lnx-bgl-01 (Restricted) ~]$ ssh lnxgg-prd-vm-01
+
+                                 WARNING!!!
+                    READ THIS BEFORE ATTEMPTING TO LOGON
+
+      This System is for the use of authorized users only.  Individuals
+      using this computer without authority, or in excess of their
+      authority, are subject to having all of their activities on this
+      system monitored and recorded by system personnel.  In the course
+      of monitoring individuals improperly using this system, or in the
+      course of system maintenance, the activities of authorized users
+      may also be monitored.  Anyone using this system expressly
+      consents to such monitoring and is advised that if such
+      monitoring reveals possible criminal activity, system personnel
+      may provide the evidence of such monitoring to law enforcement
+      officials.
+
+      Cisco Acceptable Use Policy:
+      http://wwwin.cisco.com/c/cec/organizations/security-trust/infosec/policies.html
+
+
+          ===========================================================
+              NOTE: SSH ON THIS DEVICE USES DUO
+                    1. Enter CEC Password at Password prompt
+                    2. Authenticate using DUO
+              FAQ: https://unixauth.cisco.com
+          ===========================================================
+
+Cisco AD password:
+Duo two-factor login for avikpau
+
+Enter a passcode or select one of the following options:
+
+ 1. Duo Push to +XX XXXXX X4145
+
+Passcode or option (1-1):
+Success. Logging you in...
+Last login: Sat Sep 30 12:56:15 2023 from jmp-lnx-bgl-01.cisco.com
+------------------------------------------------------------------------------
+                        PLEASE USE "setdb" TO SOURCE THE DB ENVIRONMENT
+------------------------------------------------------------------------------
+ lnxgg-prd-vm-01 ORACLE_SID
+/users/avikpau > sudo su - ggadm
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+
+              .:|:.:|:.
+                CISCO
+
+[ This device requires Duo authentication   ]
+[ For assistance: http://unixauth.cisco.com ]
+
+Duo two-factor login for avikpau
+
+Enter a passcode or select one of the following options:
+
+ 1. Duo Push to +XX XXXXX X4145
+
+Passcode or option (1-1):
+
+Pushed login request 9QLP to your device...
+Success. Logging you in...
+Last login: Fri Mar 29 01:13:57 PDT 2024 on pts/1
+[ggadm@lnxgg-prd-vm-01 ~]$ ssh dbc-prd-vm-3082
+
+                                 WARNING!!!
+                    READ THIS BEFORE ATTEMPTING TO LOGON
+
+      This System is for the use of authorized users only.  Individuals
+      using this computer without authority, or in excess of their
+      authority, are subject to having all of their activities on this
+      system monitored and recorded by system personnel.  In the course
+      of monitoring individuals improperly using this system, or in the
+      course of system maintenance, the activities of authorized users
+      may also be monitored.  Anyone using this system expressly
+      consents to such monitoring and is advised that if such
+      monitoring reveals possible criminal activity, system personnel
+      may provide the evidence of such monitoring to law enforcement
+      officials.
+
+      Cisco Acceptable Use Policy:
+      http://wwwin.cisco.com/c/cec/organizations/security-trust/infosec/policies.html
+
+\n
+          ===========================================================
+              NOTE: SSH ON THIS DEVICE USES DUO
+                    1. Enter CEC Password at Password prompt
+                    2. Authenticate using DUO
+              FAQ: http://unixauth.cisco.com
+           ===========================================================
+                    JUMP HOST RESTRICTED ACCESS
+no such identity: /apps/gg/home/ggadm/.ssh/id_ecdsa: No such file or directory
+no such identity: /apps/gg/home/ggadm/.ssh/id_ed25519: No such file or directory
+no such identity: /apps/gg/home/ggadm/.ssh/identity: No such file or directory
+Last login: Wed Mar 27 00:43:56 2024
+[ggadm@dbc-prd-vm-3082 ~]$ cd /apps/gg/home/CRTTRN
+[ggadm@dbc-prd-vm-3082 CRTTRN]$ ./start_gg.sh
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 19.1.0.0.220831 34014805_FBO
+Linux, x64, 64bit (optimized), Oracle 19c  on Oct  6 2022 04:17:49
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2022, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (dbc-prd-vm-3082) 1> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     ABENDED     CRT01       00:00:03      155:16:28
+EXTRACT     RUNNING     CRT02       00:00:02      00:00:02
+EXTRACT     RUNNING     CRTMT01     00:00:00      00:00:01
+EXTRACT     RUNNING     CRTMT02     00:00:00      00:00:05
+
+
+GGSCI (dbc-prd-vm-3082) 2> info CRTMT01
+
+EXTRACT    CRTMT01   Last Started 2024-03-20 07:53   Status RUNNING
+Checkpoint Lag       00:00:00 (updated 00:00:05 ago)
+Process ID           2702851
+Log Read Checkpoint  File /apps/gg/CRTTRN/trail/cr000000015
+                     2024-03-22 17:54:18.000000  RBA 70725761
+
+
+GGSCI (dbc-prd-vm-3082) 3> !
+info CRTMT01
+
+EXTRACT    CRTMT01   Last Started 2024-03-20 07:53   Status RUNNING
+Checkpoint Lag       00:00:00 (updated 00:00:04 ago)
+Process ID           2702851
+Log Read Checkpoint  File /apps/gg/CRTTRN/trail/cr000000015
+                     2024-03-22 17:54:18.000000  RBA 70725761
+
+
+GGSCI (dbc-prd-vm-3082) 4> !
+info CRTMT01
+
+EXTRACT    CRTMT01   Last Started 2024-03-20 07:53   Status RUNNING
+Checkpoint Lag       00:00:00 (updated 00:00:06 ago)
+Process ID           2702851
+Log Read Checkpoint  File /apps/gg/CRTTRN/trail/cr000000015
+                     2024-03-22 17:54:18.000000  RBA 70725761
+
+
+GGSCI (dbc-prd-vm-3082) 5> !
+info CRTMT01
+
+EXTRACT    CRTMT01   Last Started 2024-03-20 07:53   Status RUNNING
+Checkpoint Lag       00:00:00 (updated 00:00:06 ago)
+Process ID           2702851
+Log Read Checkpoint  File /apps/gg/CRTTRN/trail/cr000000015
+                     2024-03-22 17:54:18.000000  RBA 70725761
+
+
+GGSCI (dbc-prd-vm-3082) 6> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     ABENDED     CRT01       00:00:03      155:17:38
+EXTRACT     RUNNING     CRT02       00:00:02      00:00:01
+EXTRACT     RUNNING     CRTMT01     00:00:00      00:00:01
+EXTRACT     RUNNING     CRTMT02     00:00:00      00:00:04
+
+
+GGSCI (dbc-prd-vm-3082) 7> info CRT01
+
+EXTRACT    CRT01     Last Started 2024-03-16 00:06   Status ABENDED
+Checkpoint Lag       00:00:03 (updated 155:17:47 ago)
+Log Read Checkpoint  Oracle Integrated Redo Logs
+                     2024-03-22 17:54:22
+                     SCN 4970.3034794576 (21349022255696)
+
+
+GGSCI (dbc-prd-vm-3082) 8> view report CRT01
+
+
+Opened new report file at 2024-03-22 02:00:00.
+
+
+***********************************************************************
+**                     Run Time Messages                             **
+***********************************************************************
+
+
+2024-03-22 02:07:19  INFO    OGG-08549  57,627 records processed as of 2024-03-22 02:07:19.910999 (rate 0, delta 0).
+
+2024-03-22 02:18:19  INFO    OGG-08549  57,706 records processed as of 2024-03-22 02:18:19.122737 (rate 0, delta 0).
+
+2024-03-22 02:28:20  INFO    OGG-08549  57,778 records processed as of 2024-03-22 02:28:20.250093 (rate 0, delta 0).
+
+2024-03-22 02:33:01  WARNING OGG-01027  Long Running Transaction: XID 1.20.13.2704919, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3019917318 (2134900
+7378438), Redo Seq #450, Redo RBA 37698604.
+
+2024-03-22 02:39:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 02:39:19  INFO    OGG-08549  57,857 records processed as of 2024-03-22 02:39:19.398568 (rate 0, delta 0).
+
+2024-03-22 02:43:01  WARNING OGG-01027  Long Running Transaction: XID 1.20.13.2704919, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3019917318 (2134900
+7378438), Redo Seq #450, Redo RBA 37698604.
+
+2024-03-22 02:49:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 02:49:19  INFO    OGG-08549  57,929 records processed as of 2024-03-22 02:49:19.859845 (rate 0, delta 0).
+
+2024-03-22 02:53:01  WARNING OGG-01027  Long Running Transaction: XID 1.20.13.2704919, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3019917318 (2134900
+7378438), Redo Seq #450, Redo RBA 37698604.
+
+2024-03-22 03:00:20  INFO    OGG-08549  58,008 records processed as of 2024-03-22 03:00:20.959935 (rate 0, delta 0).
+
+2024-03-22 03:11:19  INFO    OGG-08549  58,087 records processed as of 2024-03-22 03:11:19.357883 (rate 0, delta 0).
+
+2024-03-22 03:21:20  INFO    OGG-08549  58,159 records processed as of 2024-03-22 03:21:20.287248 (rate 0, delta 0).
+
+2024-03-22 03:32:20  INFO    OGG-08549  58,238 records processed as of 2024-03-22 03:32:20.130090 (rate 0, delta 0).
+
+2024-03-22 03:43:19  INFO    OGG-08549  58,317 records processed as of 2024-03-22 03:43:19.519371 (rate 0, delta 0).
+
+2024-03-22 03:53:20  INFO    OGG-08549  58,389 records processed as of 2024-03-22 03:53:20.209971 (rate 0, delta 0).
+
+2024-03-22 03:58:02  WARNING OGG-01027  Long Running Transaction: XID 1.76.12.19389, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3021288966 (213490087
+50086), Redo Seq #453, Redo RBA 27752464.
+
+2024-03-22 04:04:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 04:04:20  INFO    OGG-08549  58,468 records processed as of 2024-03-22 04:04:20.151557 (rate 0, delta 0).
+
+2024-03-22 04:08:02  WARNING OGG-01027  Long Running Transaction: XID 1.76.12.19389, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3021288966 (213490087
+50086), Redo Seq #453, Redo RBA 27752464.
+
+2024-03-22 04:15:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 04:15:19  INFO    OGG-08549  58,547 records processed as of 2024-03-22 04:15:19.322958 (rate 0, delta 0).
+
+2024-03-22 04:18:02  WARNING OGG-01027  Long Running Transaction: XID 1.76.12.19389, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3021288966 (213490087
+50086), Redo Seq #453, Redo RBA 27752464.
+
+2024-03-22 04:22:10  INFO    OGG-01738  BOUNDED RECOVERY: CHECKPOINT: for object pool 1: p694622_extr: start=SeqNo: 456, RBA: 24022032, SCN: 4970.30226186
+59 (21349010079779), Timestamp: 2024-03-22 04:18:36.000000, end=SeqNo: 427, RBA: 69309824, SCN: 4970.3022644546 (21349010105666), Timestamp: 2024-03-22 04
+:21:57.000000, Thread: 1.
+
+2024-03-22 04:25:20  INFO    OGG-08549  58,619 records processed as of 2024-03-22 04:25:20.025721 (rate 0, delta 0).
+
+2024-03-22 04:35:20  INFO    OGG-08549  58,691 records processed as of 2024-03-22 04:35:20.713006 (rate 0, delta 0).
+
+2024-03-22 04:46:19  INFO    OGG-08549  58,770 records processed as of 2024-03-22 04:46:19.343654 (rate 0, delta 0).
+
+2024-03-22 04:56:33  INFO    OGG-08549  58,864 records processed as of 2024-03-22 04:56:33.232289 (rate 0, delta 0).
+
+2024-03-22 05:07:20  INFO    OGG-08549  58,940 records processed as of 2024-03-22 05:07:19.977152 (rate 0, delta 0).
+
+2024-03-22 05:18:19  INFO    OGG-08549  59,019 records processed as of 2024-03-22 05:18:19.989815 (rate 0, delta 0).
+
+2024-03-22 05:23:03  WARNING OGG-01027  Long Running Transaction: XID 1.84.10.436664, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3022618659 (21349010
+079779), Redo Seq #456, Redo RBA 24022032.
+
+2024-03-22 05:28:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 05:28:20  INFO    OGG-08549  59,091 records processed as of 2024-03-22 05:28:20.530309 (rate 0, delta 0).
+
+2024-03-22 05:33:03  WARNING OGG-01027  Long Running Transaction: XID 1.84.10.436664, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3022618659 (21349010
+079779), Redo Seq #456, Redo RBA 24022032.
+
+2024-03-22 05:39:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 05:39:20  INFO    OGG-08549  59,170 records processed as of 2024-03-22 05:39:20.161594 (rate 0, delta 0).
+
+2024-03-22 05:50:19  INFO    OGG-08549  59,249 records processed as of 2024-03-22 05:50:19.454806 (rate 0, delta 0).
+
+2024-03-22 06:00:20  INFO    OGG-08549  59,321 records processed as of 2024-03-22 06:00:20.401590 (rate 0, delta 0).
+
+2024-03-22 06:11:18  INFO    OGG-08549  59,400 records processed as of 2024-03-22 06:11:18.924235 (rate 0, delta 0).
+
+2024-03-22 06:21:19  INFO    OGG-08549  59,472 records processed as of 2024-03-22 06:21:19.906498 (rate 0, delta 0).
+
+2024-03-22 06:32:19  INFO    OGG-08549  59,551 records processed as of 2024-03-22 06:32:19.279374 (rate 0, delta 0).
+
+2024-03-22 06:43:04  WARNING OGG-01027  Long Running Transaction: XID 1.15.5.54673, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3023758678 (2134901121
+9798), Redo Seq #459, Redo RBA 22245392.
+
+2024-03-22 06:43:19  INFO    OGG-08549  59,630 records processed as of 2024-03-22 06:43:19.271574 (rate 0, delta 0).
+
+2024-03-22 06:48:04  WARNING OGG-01027  Long Running Transaction: XID 1.15.5.54673, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3023758678 (2134901121
+9798), Redo Seq #459, Redo RBA 22245392.
+
+2024-03-22 06:53:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 06:53:19  INFO    OGG-08549  59,702 records processed as of 2024-03-22 06:53:19.804484 (rate 0, delta 0).
+
+2024-03-22 06:58:04  WARNING OGG-01027  Long Running Transaction: XID 1.15.5.54673, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3023758678 (2134901121
+9798), Redo Seq #459, Redo RBA 22245392.
+
+2024-03-22 07:04:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 07:04:19  INFO    OGG-08549  59,781 records processed as of 2024-03-22 07:04:19.898898 (rate 0, delta 0).
+
+2024-03-22 07:15:19  INFO    OGG-08549  59,860 records processed as of 2024-03-22 07:15:19.814119 (rate 0, delta 0).
+
+2024-03-22 07:25:19  INFO    OGG-08549  59,932 records processed as of 2024-03-22 07:25:19.888534 (rate 0, delta 0).
+
+2024-03-22 07:36:19  INFO    OGG-08549  60,011 records processed as of 2024-03-22 07:36:19.352985 (rate 0, delta 0).
+
+2024-03-22 07:46:20  INFO    OGG-08549  60,083 records processed as of 2024-03-22 07:46:20.174893 (rate 0, delta 0).
+
+2024-03-22 07:56:43  INFO    OGG-08549  60,162 records processed as of 2024-03-22 07:56:43.817800 (rate 0, delta 0).
+
+2024-03-22 08:07:19  INFO    OGG-08549  60,236 records processed as of 2024-03-22 08:07:19.284689 (rate 0, delta 0).
+
+2024-03-22 08:08:05  WARNING OGG-01027  Long Running Transaction: XID 1.13.32.73232, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3025214538 (213490126
+75658), Redo Seq #461, Redo RBA 77359632.
+
+2024-03-22 08:17:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 08:17:20  INFO    OGG-08549  60,308 records processed as of 2024-03-22 08:17:20.261385 (rate 0, delta 0).
+
+2024-03-22 08:18:05  WARNING OGG-01027  Long Running Transaction: XID 1.13.32.73232, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3025214538 (213490126
+75658), Redo Seq #461, Redo RBA 77359632.
+
+2024-03-22 08:22:34  INFO    OGG-01738  BOUNDED RECOVERY: CHECKPOINT: for object pool 1: p694622_extr: start=SeqNo: 461, RBA: 77359632, SCN: 4970.30252145
+38 (21349012675658), Timestamp: 2024-03-22 07:07:10.000000, end=SeqNo: 464, RBA: 34197388, SCN: 4970.3026091195 (21349013552315), Timestamp: 2024-03-22 08
+:22:22.000000, Thread: 2.
+
+2024-03-22 08:23:05  WARNING OGG-01027  Long Running Transaction: XID 1.13.32.73232, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3025214538 (213490126
+75658), Redo Seq #461, Redo RBA 77359632.
+
+2024-03-22 08:28:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 08:28:19  INFO    OGG-08549  60,387 records processed as of 2024-03-22 08:28:19.657685 (rate 0, delta 0).
+
+2024-03-22 08:39:19  INFO    OGG-08549  60,466 records processed as of 2024-03-22 08:39:19.181719 (rate 0, delta 0).
+
+2024-03-22 08:49:20  INFO    OGG-08549  60,538 records processed as of 2024-03-22 08:49:20.151025 (rate 0, delta 0).
+
+2024-03-22 09:00:19  INFO    OGG-08549  60,617 records processed as of 2024-03-22 09:00:19.369570 (rate 0, delta 0).
+
+2024-03-22 09:10:20  INFO    OGG-08549  60,689 records processed as of 2024-03-22 09:10:20.167877 (rate 0, delta 0).
+
+2024-03-22 09:21:19  INFO    OGG-08549  60,768 records processed as of 2024-03-22 09:21:19.905446 (rate 0, delta 0).
+
+2024-03-22 09:31:20  INFO    OGG-08549  60,840 records processed as of 2024-03-22 09:31:20.155239 (rate 0, delta 0).
+
+2024-03-22 09:33:06  WARNING OGG-01027  Long Running Transaction: XID 1.69.5.211681, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3026174723 (213490136
+35843), Redo Seq #464, Redo RBA 51098640.
+
+2024-03-22 09:41:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 09:41:20  INFO    OGG-08549  60,912 records processed as of 2024-03-22 09:41:20.313005 (rate 0, delta 0).
+
+2024-03-22 09:43:06  WARNING OGG-01027  Long Running Transaction: XID 1.69.5.211681, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3026174723 (213490136
+35843), Redo Seq #464, Redo RBA 51098640.
+
+2024-03-22 09:52:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 09:52:19  INFO    OGG-08549  60,991 records processed as of 2024-03-22 09:52:19.792059 (rate 0, delta 0).
+
+2024-03-22 09:53:06  WARNING OGG-01027  Long Running Transaction: XID 1.69.5.211681, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3026174723 (213490136
+35843), Redo Seq #464, Redo RBA 51098640.
+
+2024-03-22 10:02:20  INFO    OGG-08549  61,063 records processed as of 2024-03-22 10:02:20.013696 (rate 0, delta 0).
+
+2024-03-22 10:13:19  INFO    OGG-08549  61,142 records processed as of 2024-03-22 10:13:19.033722 (rate 0, delta 0).
+
+2024-03-22 10:23:19  INFO    OGG-08549  61,214 records processed as of 2024-03-22 10:23:19.643814 (rate 0, delta 0).
+
+2024-03-22 10:34:20  INFO    OGG-08549  61,293 records processed as of 2024-03-22 10:34:20.073513 (rate 0, delta 0).
+
+2024-03-22 10:45:19  INFO    OGG-08549  61,372 records processed as of 2024-03-22 10:45:19.488706 (rate 0, delta 0).
+
+2024-03-22 10:56:19  INFO    OGG-08549  61,451 records processed as of 2024-03-22 10:56:19.822871 (rate 0, delta 0).
+
+2024-03-22 10:58:06  WARNING OGG-01027  Long Running Transaction: XID 1.84.15.436661, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3027667850 (21349015
+128970), Redo Seq #467, Redo RBA 64654124.
+
+2024-03-22 11:06:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 11:06:20  INFO    OGG-08549  61,523 records processed as of 2024-03-22 11:06:20.184231 (rate 0, delta 0).
+
+2024-03-22 11:08:07  WARNING OGG-01027  Long Running Transaction: XID 1.84.15.436661, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3027667850 (21349015
+128970), Redo Seq #467, Redo RBA 64654124.
+
+2024-03-22 11:16:54  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 11:16:54  INFO    OGG-08549  61,602 records processed as of 2024-03-22 11:16:54.028527 (rate 0, delta 0).
+
+2024-03-22 11:18:07  WARNING OGG-01027  Long Running Transaction: XID 1.84.15.436661, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3027667850 (21349015
+128970), Redo Seq #467, Redo RBA 64654124.
+
+2024-03-22 11:27:18  INFO    OGG-08549  61,676 records processed as of 2024-03-22 11:27:18.501170 (rate 0, delta 0).
+
+2024-03-22 11:37:19  INFO    OGG-08549  61,748 records processed as of 2024-03-22 11:37:19.366818 (rate 0, delta 0).
+
+2024-03-22 11:48:19  INFO    OGG-08549  61,827 records processed as of 2024-03-22 11:48:19.220357 (rate 0, delta 0).
+
+2024-03-22 11:58:20  INFO    OGG-08549  61,899 records processed as of 2024-03-22 11:58:20.281249 (rate 0, delta 0).
+
+2024-03-22 12:09:18  INFO    OGG-08549  61,978 records processed as of 2024-03-22 12:09:18.909580 (rate 0, delta 0).
+
+2024-03-22 12:19:19  INFO    OGG-08549  62,050 records processed as of 2024-03-22 12:19:19.513663 (rate 0, delta 0).
+
+2024-03-22 12:22:59  INFO    OGG-01738  BOUNDED RECOVERY: CHECKPOINT: for object pool 1: p694622_extr: start=SeqNo: 470, RBA: 24187920, SCN: 4970.30286288
+22 (21349016089942), Timestamp: 2024-03-22 11:19:11.000000, end=SeqNo: 443, RBA: 171167880, SCN: 4970.3029799536 (21349017260656), Timestamp: 2024-03-22 1
+2:22:47.000000, Thread: 1.
+
+2024-03-22 12:23:08  WARNING OGG-01027  Long Running Transaction: XID 1.19.0.110299, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3028628822 (213490160
+89942), Redo Seq #470, Redo RBA 24187920.
+
+2024-03-22 12:30:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 12:30:19  INFO    OGG-08549  62,129 records processed as of 2024-03-22 12:30:19.499783 (rate 0, delta 0).
+
+2024-03-22 12:33:08  WARNING OGG-01027  Long Running Transaction: XID 1.19.0.110299, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3028628822 (213490160
+89942), Redo Seq #470, Redo RBA 24187920.
+
+2024-03-22 12:41:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 12:41:20  INFO    OGG-08549  62,208 records processed as of 2024-03-22 12:41:20.750662 (rate 0, delta 0).
+
+2024-03-22 12:43:08  WARNING OGG-01027  Long Running Transaction: XID 1.19.0.110299, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3028628822 (213490160
+89942), Redo Seq #470, Redo RBA 24187920.
+
+2024-03-22 12:52:19  INFO    OGG-08549  62,287 records processed as of 2024-03-22 12:52:19.893335 (rate 0, delta 0).
+
+2024-03-22 13:02:20  INFO    OGG-08549  62,359 records processed as of 2024-03-22 13:02:20.130745 (rate 0, delta 0).
+
+2024-03-22 13:13:18  INFO    OGG-08549  62,439 records processed as of 2024-03-22 13:13:18.974461 (rate 0, delta 0).
+
+2024-03-22 13:23:20  INFO    OGG-08549  62,511 records processed as of 2024-03-22 13:23:20.204799 (rate 0, delta 0).
+
+2024-03-22 13:34:19  INFO    OGG-08549  62,590 records processed as of 2024-03-22 13:34:19.906444 (rate 0, delta 0).
+
+2024-03-22 13:43:09  WARNING OGG-01027  Long Running Transaction: XID 1.69.17.211753, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3030029786 (21349017
+490906), Redo Seq #473, Redo RBA 11178512.
+
+2024-03-22 13:45:19  INFO    OGG-08549  62,669 records processed as of 2024-03-22 13:45:19.552378 (rate 0, delta 0).
+
+2024-03-22 13:48:09  WARNING OGG-01027  Long Running Transaction: XID 1.69.17.211753, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3030029786 (21349017
+490906), Redo Seq #473, Redo RBA 11178512.
+
+2024-03-22 13:56:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 13:56:20  INFO    OGG-08549  62,748 records processed as of 2024-03-22 13:56:20.002370 (rate 0, delta 0).
+
+2024-03-22 13:58:09  WARNING OGG-01027  Long Running Transaction: XID 1.69.17.211753, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3030029786 (21349017
+490906), Redo Seq #473, Redo RBA 11178512.
+
+2024-03-22 14:07:01  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 14:07:01  INFO    OGG-08549  62,827 records processed as of 2024-03-22 14:07:01.935854 (rate 0, delta 0).
+
+2024-03-22 14:17:19  INFO    OGG-08549  62,901 records processed as of 2024-03-22 14:17:18.998060 (rate 0, delta 0).
+
+2024-03-22 14:27:19  INFO    OGG-08549  62,973 records processed as of 2024-03-22 14:27:19.126460 (rate 0, delta 0).
+
+2024-03-22 14:37:19  INFO    OGG-08549  63,045 records processed as of 2024-03-22 14:37:19.875656 (rate 0, delta 0).
+
+2024-03-22 14:48:19  INFO    OGG-08549  63,124 records processed as of 2024-03-22 14:48:19.411486 (rate 0, delta 0).
+
+2024-03-22 14:58:20  INFO    OGG-08549  63,196 records processed as of 2024-03-22 14:58:20.203479 (rate 0, delta 0).
+
+2024-03-22 15:08:09  WARNING OGG-01027  Long Running Transaction: XID 1.81.33.166309, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3031143036 (21349018
+604156), Redo Seq #475, Redo RBA 63404560.
+
+2024-03-22 15:09:18  INFO    OGG-08549  63,275 records processed as of 2024-03-22 15:09:18.841921 (rate 0, delta 0).
+
+2024-03-22 15:13:09  WARNING OGG-01027  Long Running Transaction: XID 1.81.33.166309, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3031143036 (21349018
+604156), Redo Seq #475, Redo RBA 63404560.
+
+2024-03-22 15:19:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 15:19:19  INFO    OGG-08549  63,347 records processed as of 2024-03-22 15:19:19.947179 (rate 0, delta 0).
+
+2024-03-22 15:23:10  WARNING OGG-01027  Long Running Transaction: XID 1.81.33.166309, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3031143036 (21349018
+604156), Redo Seq #475, Redo RBA 63404560.
+
+2024-03-22 15:30:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 15:30:19  INFO    OGG-08549  63,426 records processed as of 2024-03-22 15:30:19.621307 (rate 0, delta 0).
+
+2024-03-22 15:41:19  INFO    OGG-08549  63,505 records processed as of 2024-03-22 15:41:19.451384 (rate 0, delta 0).
+
+2024-03-22 15:51:20  INFO    OGG-08549  63,577 records processed as of 2024-03-22 15:51:20.727789 (rate 0, delta 0).
+
+2024-03-22 16:02:19  INFO    OGG-08549  63,656 records processed as of 2024-03-22 16:02:19.328332 (rate 0, delta 0).
+
+2024-03-22 16:12:19  INFO    OGG-08549  63,728 records processed as of 2024-03-22 16:12:19.502830 (rate 0, delta 0).
+
+2024-03-22 16:23:25  INFO    OGG-01738  BOUNDED RECOVERY: CHECKPOINT: for object pool 1: p694622_extr: start=SeqNo: 478, RBA: 62379024, SCN: 4970.30323956
+22 (21349019856742), Timestamp: 2024-03-22 15:32:02.000000, end=SeqNo: 451, RBA: 80978304, SCN: 4970.3033076131 (21349020537251), Timestamp: 2024-03-22 16
+:23:14.000000, Thread: 1.
+
+2024-03-22 16:23:25  INFO    OGG-08549  63,807 records processed as of 2024-03-22 16:23:25.313558 (rate 0, delta 0).
+
+2024-03-22 16:33:10  WARNING OGG-01027  Long Running Transaction: XID 1.72.15.242208, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3032395622 (21349019
+856742), Redo Seq #478, Redo RBA 62379024.
+
+2024-03-22 16:34:19  INFO    OGG-08549  63,886 records processed as of 2024-03-22 16:34:19.548968 (rate 0, delta 0).
+
+2024-03-22 16:38:10  WARNING OGG-01027  Long Running Transaction: XID 1.72.15.242208, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3032395622 (21349019
+856742), Redo Seq #478, Redo RBA 62379024.
+
+2024-03-22 16:44:20  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 16:44:20  INFO    OGG-08549  63,958 records processed as of 2024-03-22 16:44:20.217502 (rate 0, delta 0).
+
+2024-03-22 16:48:10  WARNING OGG-01027  Long Running Transaction: XID 1.72.15.242208, Items 0, Extract CRT01, Redo Thread 2, SCN 4970.3032395622 (21349019
+856742), Redo Seq #478, Redo RBA 62379024.
+
+2024-03-22 16:55:19  INFO    OGG-01971  The previous message, 'WARNING OGG-01027', repeated 1 times.
+
+2024-03-22 16:55:19  INFO    OGG-08549  64,037 records processed as of 2024-03-22 16:55:19.317294 (rate 0, delta 0).
+
+2024-03-22 17:05:20  INFO    OGG-08549  64,109 records processed as of 2024-03-22 17:05:20.403118 (rate 0, delta 0).
+
+2024-03-22 17:16:18  INFO    OGG-08549  64,188 records processed as of 2024-03-22 17:16:18.782710 (rate 0, delta 0).
+
+2024-03-22 17:26:20  INFO    OGG-08549  64,260 records processed as of 2024-03-22 17:26:20.369049 (rate 0, delta 0).
+
+2024-03-22 17:37:10  INFO    OGG-08549  64,339 records processed as of 2024-03-22 17:37:10.665072 (rate 0, delta 0).
+
+2024-03-22 17:47:10  INFO    OGG-08549  64,411 records processed as of 2024-03-22 17:47:10.983618 (rate 0, delta 0).
+
+Source Context :
+  SourceModule            : [er.redo.oraxo]
+  SourceID                : [er/redo/oracle/redooraix.c]
+  SourceMethod            : [handleReadError]
+  SourceLine              : [17007]
+  ThreadBacktrace         : [11] elements
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageContext::AddThreadContext())]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageFactory::CreateMessage(CSourceContext*, unsigned int, ...))]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(_MSG_Int32_String(CSourceContext*, int, int, char const*, CMessageFactory::MessageDispositio
+n))]
+                          : [/apps/gg/home/CRTTRN/extract(RedoIE::handleReadError(char (&) [2048]))]
+                          : [/apps/gg/home/CRTTRN/extract()]
+                          : [/apps/gg/home/CRTTRN/extract(ProducerContext::readLCR(bool&, bool&))]
+                          : [/apps/gg/home/CRTTRN/extract(IXFormatter::readLCR())]
+                          : [/apps/gg/home/CRTTRN/extract(IXFormatter::FormatterThread(void*))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::Thread::RunThread(ggs::gglib::MultiThreading::Thread::ThreadArgs*))]
+                          : [/lib64/libpthread.so.0()]
+                          : [/lib64/libc.so.6(clone)]
+
+2024-03-22 17:54:28  ERROR   OGG-00662  OCI Error ORA-04031: unable to allocate  bytes of shared memory ("","","","")
+ (status = 4031).
+
+Source Context :
+  SourceModule            : [er.redo.ora.IXFormatter]
+  SourceID                : [er/redo/oracle/IXFormatter.cpp]
+  SourceMethod            : [getResult]
+  SourceLine              : [775]
+  ThreadBacktrace         : [15] elements
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageContext::AddThreadContext())]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageFactory::CreateMessage(CSourceContext*, unsigned int, ...))]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(_MSG_(CSourceContext*, int, CMessageFactory::MessageDisposition))]
+                          : [/apps/gg/home/CRTTRN/extract()]
+                          : [/apps/gg/home/CRTTRN/extract(RedoIE::readLCR(ggs::gglib::gglcr::CommonLCR**, long&, bool&))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::er::OraTranLogDataSource::readLCR(ggs::gglib::gglcr::CommonLCR**, long&, bool&))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::er::ExtractContext::processExtractLoop())]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::er::ExtractContext::run())]
+                          : [/apps/gg/home/CRTTRN/extract()]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::MainThread::ExecMain())]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::Thread::RunThread(ggs::gglib::MultiThreading::Thread::ThreadArgs*))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::MainThread::Run(int, char**))]
+                          : [/apps/gg/home/CRTTRN/extract(main)]
+                          : [/lib64/libc.so.6(__libc_start_main)]
+                          : [/apps/gg/home/CRTTRN/extract()]
+
+2024-03-22 17:54:28  ERROR   OGG-02078  Extract encountered a fatal error in a processing thread and is abending.
+
+***********************************************************************
+*                   ** Run Time Statistics **                         *
+***********************************************************************
+
+
+Report at 2024-03-22 17:54:28 (activity since 2024-03-22 02:00:00)
+
+Output to /apps/gg/CRTTRN/trail/cr:
+
+From Table CRTTRN.GGADM.GG_HEARTBEAT:
+       #                   inserts:         0
+       #                   updates:      5730
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.GGADM.GG_HEARTBEAT_SEED:
+       #                   inserts:         0
+       #                   updates:       955
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXMDME.XXMDME_CPAM_CUST_ACC_MAP_STAGE:
+       #                   inserts:         7
+       #                   updates:         0
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXNGCR.XXNGCR_SOURCE_IMAGE:
+       #                   inserts:         2
+       #                   updates:         1
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXGRID.XXGRID_CSC_LOOKUPS:
+       #                   inserts:         0
+       #                   updates:       190
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXCPAM.XXCPAM_CUST_ACCT_RELATIONS:
+       #                   inserts:         2
+       #                   updates:         0
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXMDME.XXMDME_CPAM_CUST_ACC_REL_STAGE:
+       #                   inserts:         2
+       #                   updates:         0
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXMDME.XXMDME_PARTY_STAGE:
+       #                   inserts:         0
+       #                   updates:         2
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+From Table CRTTRN.XXMDME.XXMDME_MAPPING_STAGE:
+       #                   inserts:         2
+       #                   updates:         0
+       #                   deletes:         0
+       #                   upserts:         0
+       #                  discards:         0
+
+
+2024-03-22 17:54:28  ERROR   OGG-01668  PROCESS ABENDING.
+
+CACHE OBJECT MANAGER statistics
+
+CACHE MANAGER VM USAGE
+vm current     =   7.38M   vm anon queues =   7.38M
+vm anon in use =      0    vm file        =      0
+vm used max    =   7.38M   cachesize      =     64G
+
+CACHE CONFIGURATION
+cache size            =  64G   cache force paging   =  96G
+pageout eligible size =   8M   cache vm pageout max =  64M
+
+================================================================================
+RUNTIME STATS FOR SUPERPOOL
+
+Note: CACHE objects are often but not always proxies for transactions
+
+CACHE Object Stats
+objects active  =      9    max concurrent =  28.71K
+non-zero total  = 720.33K   objects total  =  10.67M
+
+CACHE File Caching
+filecache rqsts        =      0    bytes to disk      =      0
+file retrieves         =      0    objs filecached    =      0
+queue entries          =      0    queue processed    =     40
+queue entry not needed =      0    queue not signaled =      0
+fc requesting obj      =      0
+
+CACHE MANAGEMENT
+buffer links   =      2   anon gets   =      0
+forced unmaps  =      0   cnnbl try   =      0
+cached out     =      0
+
+Note: For statistics tables below each specification represents a power of
+two bucket.
+For example: '|4K: 1234 |8K:' represents 1234 items between 4K and 8K-1
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:    61.65K    |   1K:     4.59K
+   2K:   706.55K    |   4K:        9     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+Cached Object Size Distribution
+    0:     9.97M
+ < 4K:   710.72K
+   4K:     9.60K    |   8K:        4     |  16K:        4     |  32K:        1
+  64K:        1     | 128K:        0     | 256K:        0     | 512K:        1
+   1M:        0     |   2M:        0     |   4M:        0     |   8M:        0
+  16M:        0     |  32M:        0     |  64M:        0     | 128M:        0
+ 256M:        0     | 512M:        0     |   1G:        0     |   2G:        0
+   4G:        0     |   8G:        0     |  16G:        0     |  32G:        0
+  64G:        0     | 128G:        0     | 256G:        0     | 512G:        0
+   1T:        0     |   2T:        0     |   4T:        0     |   8T:        0
+  16T:        0     |  32T:        0     |  64T:        0     | 128T:        0
+ 256T:        0     | 512T:        0     |   1P:        0     |   2P:        0
+
+================================================================================
+CUMULATIVE STATS FOR SUPERPOOL (PREVIOUS RUNS ONLY)
+
+Note: CACHE objects are often but not always proxies for transactions
+
+CACHE Object Stats
+objects active  =      8    max concurrent =  28.71K
+non-zero total  = 714.33K   objects total  =  10.47M
+
+CACHE File Caching
+filecache rqsts        =      0    bytes to disk      =      0
+file retrieves         =      0    objs filecached    =      0
+queue entries          =      0    queue processed    =     40
+queue entry not needed =      0    queue not signaled =      0
+fc requesting obj      =      0
+
+CACHE MANAGEMENT
+buffer links   =      2   anon gets   =      0
+forced unmaps  =      0   cnnbl try   =      0
+cached out     =      0
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:   60.100K    |   1K:     4.50K
+   2K:   700.73K    |   4K:        9     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+Cached Object Size Distribution
+    0:     9.78M
+ < 4K:   704.80K
+   4K:     9.51K    |   8K:        4     |  16K:        4     |  32K:        1
+  64K:        1     | 128K:        0     | 256K:        0     | 512K:        1
+   1M:        0     |   2M:        0     |   4M:        0     |   8M:        0
+  16M:        0     |  32M:        0     |  64M:        0     | 128M:        0
+ 256M:        0     | 512M:        0     |   1G:        0     |   2G:        0
+   4G:        0     |   8G:        0     |  16G:        0     |  32G:        0
+  64G:        0     | 128G:        0     | 256G:        0     | 512G:        0
+   1T:        0     |   2T:        0     |   4T:        0     |   8T:        0
+  16T:        0     |  32T:        0     |  64T:        0     | 128T:        0
+ 256T:        0     | 512T:        0     |   1P:        0     |   2P:        0
+
+
+QUEUE Statistics
+num queues =     15     q hits = 720.22K     q misses =    103
+
+queue size  q hits  curlen  maxlen     cannibalized
+  0   64K 720.22K    102     102       0
+  1  128K      0       0       0       0
+  2  256K      0       0       0       0
+  3  512K      0       0       0       0
+  4    1M      1       1       1       0
+  5    2M      0       0       0       0
+  6    4M      0       0       0       0
+  7    8M      0       0       0       0
+  8   16M      0       0       0       0
+  9   32M      0       0       0       0
+ 10   64M      0       0       0       0
+ 11  128M      0       0       0       0
+ 12  256M      0       0       0       0
+ 13  512M      0       0       0       0
+ 14    1G      0       0       0       0
+
+================================================================================
+RUNTIME STATS FOR CACHE POOL #0
+POOL INFO   group: crt01  id: p694622_extr  instance: 1  tid: 0x7f385cd8e680
+objects active =        9   objects concurrent (max) = 28.71K
+objects total  =    10.67M  (10.67M)
+flag           = 0x000000175
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:    61.65K    |   1K:     4.59K
+   2K:   706.55K    |   4K:        9     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+================================================================================
+CUMULATIVE STATS FOR CACHE POOL #0 (PREVIOUS RUNS ONLY)
+POOL INFO   group: crt01  id: p694622_extr  instance: 1  tid: 0x7f385cd8e680
+objects active =        9   objects concurrent (max) = 28.71K
+objects total  =    10.47M  (10.47M)
+flag           = 0x000000175
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:   60.100K    |   1K:     4.50K
+   2K:   700.73K    |   4K:        9     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+================================================================================
+RUNTIME STATS FOR CACHE POOL #1
+POOL INFO   group: crt01  id: p694622_BLOB  instance: 0  tid: (nil)
+objects active =        0   objects concurrent (max) =     0
+objects total  =        0   (0 )
+flag           = 0x000000030
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:        0     |   1K:        0
+   2K:        0     |   4K:        0     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+================================================================================
+CUMULATIVE STATS FOR CACHE POOL #1 (PREVIOUS RUNS ONLY)
+POOL INFO   group: crt01  id: p694622_BLOB  instance: 0  tid: (nil)
+objects active =        0   objects concurrent (max) =     0
+objects total  =        0   (0 )
+flag           = 0x000000030
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:        0     |   1K:        0
+   2K:        0     |   4K:        0     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+================================================================================
+RUNTIME STATS FOR CACHE POOL #2
+POOL INFO   group: crt01  id: p694622_ORA-LOB-MEMPOOL  instance: 0  tid: (nil)
+objects active =        0   objects concurrent (max) =     0
+objects total  =        0   (0 )
+flag           = 0x000000279
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:        0     |   1K:        0
+   2K:        0     |   4K:        0     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+================================================================================
+CUMULATIVE STATS FOR CACHE POOL #2 (PREVIOUS RUNS ONLY)
+POOL INFO   group: crt01  id: p694622_ORA-LOB-MEMPOOL  instance: 0  tid: (nil)
+objects active =        0   objects concurrent (max) =     0
+objects total  =        0   (0 )
+flag           = 0x000000279
+last error     = (0=<none>)
+
+Allocation Request Distribution
+< 128B:       0
+ 128B:        0     | 256B:        0     | 512B:        0     |   1K:        0
+   2K:        0     |   4K:        0     |   8K:        0     |  16K:        0
+  32K:        0     |  64K:        0     | 128K:        0     | 256K:        0
+ 512K:        0     |   1M:        0     |   2M:        0     |   4M:        0
+   8M:        0     |  16M:        0     |  32M:        0     |  64M:        0
+ 128M:        0     | 256M:        0     | 512M:        0     |   1G:        0
+   2G:        0     |   4G:        0     |   8G:        0
+
+
+
+GGSCI (dbc-prd-vm-3082) 9> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     ABENDED     CRT01       00:00:03      155:19:18
+EXTRACT     RUNNING     CRT02       00:00:01      00:00:01
+EXTRACT     RUNNING     CRTMT01     00:00:00      00:00:00
+EXTRACT     RUNNING     CRTMT02     00:00:00      00:00:04
+
+
+GGSCI (dbc-prd-vm-3082) 10> start CRT01
+
+Sending START request to MANAGER ...
+EXTRACT CRT01 starting
+
+
+GGSCI (dbc-prd-vm-3082) 11> info CRT01
+
+EXTRACT    CRT01     Last Started 2024-03-16 00:06   Status ABENDED
+Checkpoint Lag       00:00:03 (updated 155:19:33 ago)
+Log Read Checkpoint  Oracle Integrated Redo Logs
+                     2024-03-22 17:54:22
+                     SCN 4970.3034794576 (21349022255696)
+
+
+GGSCI (dbc-prd-vm-3082) 12> view report CRT01
+
+
+***********************************************************************
+                 Oracle GoldenGate Capture for Oracle
+                 Version 19.1.0.0.220831 34014805_FBO
+  Linux, x64, 64bit (optimized), Oracle 19c  on Oct  6 2022 04:19:07
+
+Copyright (C) 1995, 2022, Oracle and/or its affiliates. All rights reserved.
+
+                    Starting at 2024-03-29 05:13:53
+***********************************************************************
+
+Operating System Version:
+Linux
+Version #1 SMP Thu Nov 16 10:29:04 EST 2023, Release 4.18.0-513.9.1.el8_9.x86_64
+Node: dbc-prd-vm-3082
+Machine: x86_64
+                         soft limit   hard limit
+Address Space Size   :    unlimited    unlimited
+Heap Size            :    unlimited    unlimited
+File Size            :    unlimited    unlimited
+CPU Time             :    unlimited    unlimited
+
+Process id: 2653112
+
+Description:
+
+***********************************************************************
+**            Running with the following parameters                  **
+***********************************************************************
+
+2024-03-29 05:13:53  INFO    OGG-03059  Operating system character set identified as UTF-8.
+
+2024-03-29 05:13:53  INFO    OGG-02695  ANSI SQL parameter syntax is used for parameter parsing.
+
+2024-03-29 05:13:53  INFO    OGG-02095  Successfully set environment variable ORACLE_HOME=/oracle/product/19.3.0/ZCRTTRN.
+
+2024-03-29 05:13:53  INFO    OGG-02095  Successfully set environment variable ORACLE_SID=ZCRTTRN.
+
+2024-03-29 05:13:53  INFO    OGG-02095  Successfully set environment variable TNS_ADMIN=/oracle/product/19.3.0/ZCRTTRN/network/admin.
+
+2024-03-29 05:13:53  INFO    OGG-02095  Successfully set environment variable NLS_LANG=AMERICAN_AMERICA.AL32UTF8.
+
+2024-03-29 05:13:53  INFO    OGG-01360  EXTRACT is running in Integrated mode.
+EXTRACT CRT01
+SETENV (ORACLE_HOME='/oracle/product/19.3.0/ZCRTTRN')
+SETENV (ORACLE_SID = 'ZCRTTRN')
+SETENV (TNS_ADMIN='/oracle/product/19.3.0/ZCRTTRN/network/admin')
+SETENV (NLS_LANG = 'AMERICAN_AMERICA.AL32UTF8')
+USERIDALIAS ZCRTTRN
+TRANLOGOPTIONS INTEGRATEDPARAMS  (max_sga_size 2000)
+TRANLOGOPTIONS FETCHPARTIALLOB
+TRANLOGOPTIONS PERFORMANCEPROFILE HIGH
+TRANLOGOPTIONS CHECKPOINTRETENTIONTIME 1
+LOGALLSUPCOLS
+
+2024-03-29 05:13:53  WARNING OGG-04033   LOGALLSUPCOLS has set the NOCOMPRESSDELETES and GETUPDATEBEFORES parameters on.
+UPDATERECORDFORMAT FULL
+REPORTCOUNT EVERY 10 MINUTES, RATE
+WARNLONGTRANS 60MIN
+STATOPTIONS REPORTFETCH, RESETREPORTSTATS
+REPORT AT 02:00
+REPORTROLLOVER AT 02:00
+DISCARDROLLOVER at 00:00
+BR BRDIR /apps/gg/CRTTRN
+EXTTRAIL /apps/gg/CRTTRN/trail/cr
+SOURCECATALOG CRTTRN
+TABLE XXCCR.XXCCR_ATTR_ASSIGNMENTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_ATTR_ASSIGNMENTS mapping.
+TABLE XXCCR.XXCCR_HMT_AGU_HIERARCHIES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_HMT_AGU_HIERARCHIES mapping.
+TABLE XXCCR.XXCCR_PUB_CM_APV_TRANS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_PUB_CM_APV_TRANS mapping.
+TABLE XXCCR.XXCCR_PUB_CM_TRANS_APV_DTLS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_PUB_CM_TRANS_APV_DTLS mapping.
+TABLE XXCPAM.XXCPAM_CUST_ACCT_RELATIONS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_CUST_ACCT_RELATIONS mapping.
+TABLE XXCRHUB.XXCRHUB_MCV_ACCT_MAP;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MCV_ACCT_MAP mapping.
+TABLE XXCRHUB.XXCRHUB_MCV_ORG;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MCV_ORG mapping.
+TABLE XXCRHUB.XXCRHUB_MCV_PGTMV;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MCV_PGTMV mapping.
+TABLE XXCRHUB.XXCRHUB_MCV_PRODUCT;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MCV_PRODUCT mapping.
+TABLE XXCRHUB.XXCRHUB_MCV_SITE_USE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MCV_SITE_USE mapping.
+TABLE XXCRHUB.XXCRHUB_MY_CUSTOMER_DTLS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCRHUB.XXCRHUB_MY_CUSTOMER_DTLS mapping.
+TABLE XXGRID.XXGRID_CSC_FL_COUNTRY_MAPPING;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_CSC_FL_COUNTRY_MAPPING mapping
+.
+TABLE XXGRID.XXGRID_CSC_GEO_COMPLETENESS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_CSC_GEO_COMPLETENESS mapping.
+TABLE XXGRID.XXGRID_CSC_GEO_COMPLETENESS_EA;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_CSC_GEO_COMPLETENESS_EA mappin
+g.
+TABLE XXGRID.XXGRID_CSC_LOOKUPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_CSC_LOOKUPS mapping.
+TABLE XXGRID.XXGRID_GEO_CERTIFIED_LEVEL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_CERTIFIED_LEVEL mapping.
+TABLE XXGRID.XXGRID_GEO_DENORM_ENTITIES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_DENORM_ENTITIES mapping.
+TABLE XXGRID.XXGRID_GEO_ENTITIES_REL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_ENTITIES_REL mapping.
+TABLE XXGRID.XXGRID_GEO_LOOKUPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_LOOKUPS mapping.
+TABLE XXGRID.XXGRID_GEO_SECONDARY_NAMES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_SECONDARY_NAMES mapping.
+TABLE XXGRID.XXGRID_GEO_TOKEN_API;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.XXGRID_GEO_TOKEN_API mapping.
+TABLE XXHMPCR.XXHMPCR_OE_GROUP_ENTITY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXHMPCR.XXHMPCR_OE_GROUP_ENTITY mapping.
+TABLE XXHMPCR.XXHMPCR_OE_CR_LINKAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXHMPCR.XXHMPCR_OE_CR_LINKAGE mapping.
+TABLE XXHMPCR.OE_CR_LINKAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXHMPCR.OE_CR_LINKAGE mapping.
+TABLE XXHMPCR.OE_GROUP_ENTITY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXHMPCR.OE_GROUP_ENTITY mapping.
+TABLE XXMDME.XXMDME_ATTR_ASSIGMENTS_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_ATTR_ASSIGMENTS_STAGE mapping.
+TABLE XXMDME.XXMDME_CPAM_CUST_ACC_MAP_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_CPAM_CUST_ACC_MAP_STAGE mappin
+g.
+TABLE XXMDME.XXMDME_CPAM_CUST_ACC_REL_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_CPAM_CUST_ACC_REL_STAGE mappin
+g.
+TABLE XXMDME.XXMDME_MAPPING_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_MAPPING_STAGE mapping.
+TABLE XXMDME.XXMDME_PARTY_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_PARTY_STAGE mapping.
+TABLE XXMDME.XXMDME_PGTMV_HIERARCHIES_STAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXMDME.XXMDME_PGTMV_HIERARCHIES_STAGE mappin
+g.
+TABLE XXNGCR.XXNGCR_AM_ATTRIBUTES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_AM_ATTRIBUTES mapping.
+TABLE XXNGCR.XXNGCR_AM_ATTRIBUTES_HIS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_AM_ATTRIBUTES_HIS mapping.
+TABLE XXNGCR.XXNGCR_AM_LOOKUP_DTLS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_AM_LOOKUP_DTLS mapping.
+TABLE XXNGCR.XXNGCR_DNM_RELATIONSHIPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_DNM_RELATIONSHIPS mapping.
+TABLE XXNGCR.XXNGCR_LOC_PUB_TRANSACTIONS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_LOC_PUB_TRANSACTIONS mapping.
+TABLE XXNGCR.XXNGCR_PARTY_ATTRIBUTES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_PARTY_ATTRIBUTES mapping.
+TABLE XXNGCR.XXNGCR_PARTY_IDENTITY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_PARTY_IDENTITY mapping.
+TABLE XXNGCR.XXNGCR_PARTY_IDENTITY_HIST;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_PARTY_IDENTITY_HIST mapping.
+TABLE XXNGCR.XXNGCR_PUB_CM_TRANSACTIONS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_PUB_CM_TRANSACTIONS mapping.
+TABLE XXNGCR.XXNGCR_SOURCE_IMAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_SOURCE_IMAGE mapping.
+TABLE XXNGCR.XXNGCR_SOURCE_IMAGE_HIST;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGCR.XXNGCR_SOURCE_IMAGE_HIST mapping.
+TABLE XXNGPP.XXNGPP_PUB_CM_PP_TRANS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGPP.XXNGPP_PUB_CM_PP_TRANS mapping.
+TABLE XXNGPP.XXNGPP_PUB_CM_PP_TRANS_DTLS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGPP.XXNGPP_PUB_CM_PP_TRANS_DTLS mapping.
+TABLE XXSAV.XXSAV_CASE_ATTR_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CASE_ATTR_DETAILS mapping.
+TABLE XXSAV.XXSAV_CASE_HEADER;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CASE_HEADER mapping.
+TABLE XXSAV.XXSAV_CASE_PARTY_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CASE_PARTY_DETAILS mapping.
+TABLE XXSAV.XXSAV_COMMENTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_COMMENTS mapping.
+TABLE XXSAV.XXSAV_CONFLICT_CBD;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CONFLICT_CBD mapping.
+TABLE XXSAV.XXSAV_CONFLICT_GROUPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CONFLICT_GROUPS mapping.
+TABLE XXSAV.XXSAV_CONFLICT_GRP_ACCOUNTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CONFLICT_GRP_ACCOUNTS mapping.
+TABLE XXSAV.XXSAV_CONFLICT_PARTY_EXT;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_CONFLICT_PARTY_EXT mapping.
+TABLE XXSAV.XXSAV_GA_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_GA_DETAILS mapping.
+TABLE XXSAV.XXSAV_GBM_DTL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_GBM_DTL mapping.
+TABLE XXSAV.XXSAV_GBM_HDR;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_GBM_HDR mapping.
+TABLE XXSAV.XXSAV_LOOKUPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_LOOKUPS mapping.
+TABLE XXSAV.XXSAV_NODE_GEO_BDY_REL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_NODE_GEO_BDY_REL mapping.
+TABLE XXSAV.XXSAV_NODE_RMID_REL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_NODE_RMID_REL mapping.
+TABLE XXSAV.XXSAV_NSC_ATTRIBUTES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_NSC_ATTRIBUTES mapping.
+TABLE XXSAV.XXSAV_SA_ATTR_COVERAGE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SA_ATTR_COVERAGE mapping.
+TABLE XXSAV.XXSAV_SA_ATTR_GEO_BDY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SA_ATTR_GEO_BDY mapping.
+TABLE XXSAV.XXSAV_SA_ATTR_NODE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SA_ATTR_NODE mapping.
+TABLE XXSAV.XXSAV_SA_ATTR_OWNER;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SA_ATTR_OWNER mapping.
+TABLE XXSAV.XXSAV_SA_ATTR_PROGRAM;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SA_ATTR_PROGRAM mapping.
+TABLE XXSAV.XXSAV_SALES_ACCOUNTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SALES_ACCOUNTS mapping.
+TABLE XXSAV.XXSAV_SALES_ACCT_MEMBERS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SALES_ACCT_MEMBERS mapping.
+TABLE XXSAV.XXSAV_SAM_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SAM_DETAILS mapping.
+TABLE XXSAV.XXSAV_SEGMENTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SEGMENTS mapping.
+TABLE XXSAV.XXSAV_SG_SAM_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SG_SAM_DETAILS mapping.
+TABLE XXSAV.XXSAV_SHR_CR_CE_SOAC_SUMMARY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_SHR_CR_CE_SOAC_SUMMARY mapping.
+TABLE XXSAV.XXSAV_TEMPLATE_SAM_DETAILS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXSAV.XXSAV_TEMPLATE_SAM_DETAILS mapping.
+TABLE XXCPAM.XXCPAM_HZ_ORGANIZATION_PROFILE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_ORGANIZATION_PROFILE mappin
+g.
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCT_RELATE_ALL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_ACCT_RELATE_ALL mappin
+g.
+TABLE XXCPAM.XXCPAM_HZ_CUST_PROFILE_AMTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_PROFILE_AMTS mapping.
+TABLE XXCPAM.XXCPAM_HZ_CONTACT_POINTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CONTACT_POINTS mapping.
+TABLE XXCPAM.XXCPAM_HZ_ORG_CONTACT_ROLES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_ORG_CONTACT_ROLES mapping.
+TABLE XXCPAM.XXCPAM_HZ_ROLE_RESPONSIBILITY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_ROLE_RESPONSIBILITY mapping
+.
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCOUNT_ROLES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_ACCOUNT_ROLES mapping.
+TABLE XXCPAM.XXCPAM_HZ_ORG_CONTACTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_ORG_CONTACTS mapping.
+TABLE XXCPAM.XXCPAM_HZ_RELATIONSHIPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_RELATIONSHIPS mapping.
+TABLE XXCPAM.XXCPAM_HZ_CUST_SITE_USES_ALL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_SITE_USES_ALL mapping.
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCT_SITES_ALL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_ACCT_SITES_ALL mapping
+.
+TABLE XXCPAM.XXCPAM_HZ_PARTY_SITES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_PARTY_SITES mapping.
+TABLE XXCPAM.XXCPAM_HZ_PARTY_SITE_USES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_PARTY_SITE_USES mapping.
+TABLE XXCPAM.XXCPAM_HZ_LOCATIONS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_LOCATIONS mapping.
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCOUNTS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_CUST_ACCOUNTS mapping.
+TABLE XXCPAM.XXCPAM_HZ_PARTIES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_HZ_PARTIES mapping.
+TABLE XXCPAM.XXCPAM_RA_TERMS_TL;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCPAM.XXCPAM_RA_TERMS_TL mapping.
+TABLE XXNGPP.XXNGPP_DNM_RELATIONSHIPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGPP.XXNGPP_DNM_RELATIONSHIPS mapping.
+TABLE XXCCR.XXCCR_PGTMV_EDW_COUNTRY_GRP;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_PGTMV_EDW_COUNTRY_GRP mapping.
+TABLE XXNGPP.XXNGPP_DNM_PERSON_PROFILE;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXNGPP.XXNGPP_DNM_PERSON_PROFILE mapping.
+TABLE XXCCR.XXCCR_DNM_PGTMV_HIERARCHY;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_DNM_PGTMV_HIERARCHY mapping.
+TABLE XXGRID.COUNTRYISO;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXGRID.COUNTRYISO mapping.
+TABLE XXCCR.XXCCR_GROUP_PARTIES_REFERENCES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_GROUP_PARTIES_REFERENCES mapping
+.
+TABLE XXCCR.XXCCR_GROUP_PARTIES;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCCR.XXCCR_GROUP_PARTIES mapping.
+TABLE XXCSAV.XXCSA_DNM_RELATIONSHIPS;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCSAV.XXCSA_DNM_RELATIONSHIPS mapping.
+TABLE XXCSAV.XXCSA_DNM_SNAPSHOT_INCR;
+
+2024-03-29 05:13:53  INFO    OGG-02623  Default source catalog name CRTTRN will be used for source table name XXCSAV.XXCSA_DNM_SNAPSHOT_INCR mapping.
+
+2024-03-29 05:13:53  INFO    OGG-02734  Using heartbeat table from schema GGADM.
+
+2024-03-29 05:13:53  INFO    OGG-01815  Virtual Memory Facilities for: BR
+    anon alloc: mmap(MAP_ANON)  anon free: munmap
+    file alloc: mmap(MAP_SHARED)  file free: munmap
+    target directories:
+    /apps/gg/CRTTRN/BR/CRT01.
+
+Bounded Recovery Parameter:
+BRINTERVAL = 4HOURS
+BRDIR      = /apps/gg/CRTTRN
+
+2024-03-29 05:13:54  INFO    OGG-01851  filecaching started: thread ID: 140627788687104.
+
+2024-03-29 05:13:54  INFO    OGG-01815  Virtual Memory Facilities for: COM
+    anon alloc: mmap(MAP_ANON)  anon free: munmap
+    file alloc: mmap(MAP_SHARED)  file free: munmap
+    target directories:
+    /apps/gg/home/CRTTRN/dirtmp.
+
+2024-03-29 05:13:54  INFO    OGG-01639  BOUNDED RECOVERY:  ACTIVE: for object pool 1: p694622_extr.
+
+2024-03-29 05:13:54  INFO    OGG-01640  BOUNDED RECOVERY: recovery start XID: 2933341454.72.15.242208.
+
+2024-03-29 05:13:54  INFO    OGG-01641  BOUNDED RECOVERY: recovery start position: SeqNo: 478, RBA: 62379024, SCN: 4970.3032395622 (21349019856742), Times
+tamp: 2024-03-22 15:32:02.000000.
+
+2024-03-29 05:13:54  INFO    OGG-01642  BOUNDED RECOVERY: recovery end position: SeqNo: 451, RBA: 80978304, SCN: 4970.3033076131 (21349020537251), Timesta
+mp: 2024-03-22 16:23:14.000000, Thread: 1.
+
+2024-03-29 05:13:54  INFO    OGG-01643  BOUNDED RECOVERY: CANCELED: for object pool 1: p694622_extr.
+
+2024-03-29 05:13:54  INFO    OGG-01579  BOUNDED RECOVERY: VALID BCP: CP.CRT01.000000040.
+
+2024-03-29 05:13:54  INFO    OGG-01629  BOUNDED RECOVERY: PERSISTED OBJECTS RECOVERED: <<NONE TO RECOVER>>.
+
+2024-03-29 05:13:54  INFO    OGG-25340
+Database Version:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.21.0.0.0.
+
+2024-03-29 05:13:54  INFO    OGG-25341
+Database Language and Character Set:
+NLS_LANGUAGE     = "AMERICAN"
+NLS_TERRITORY    = "AMERICA"
+NLS_CHARACTERSET = "AL32UTF8".
+
+2024-03-29 05:13:55  INFO    OGG-06604  Database ZCRTTRN.CISCO.COM CPU info: CPU Count 32, CPU Core Count 32, CPU Socket Count 32.
+
+2024-03-29 05:13:55  INFO    OGG-06618  Database ZCRTTRN.CISCO.COM Platform: Linux x86 64-bit.
+
+2024-03-29 05:13:56  INFO    OGG-02248  Logmining server DDL filtering enabled.
+
+Source Context :
+  SourceModule            : [er.redo.oraxo]
+  SourceID                : [er/redo/oracle/redooraix.c]
+  SourceMethod            : [attach]
+  SourceLine              : [1989]
+  ThreadBacktrace         : [16] elements
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageContext::AddThreadContext())]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(CMessageFactory::CreateMessage(CSourceContext*, unsigned int, ...))]
+                          : [/apps/gg/home/CRTTRN/libgglog.so(_MSG_String_Int32_String(CSourceContext*, int, char const*, int, char const*, CMessageFactor
+y::MessageDisposition))]
+                          : [/apps/gg/home/CRTTRN/extract()]
+                          : [/apps/gg/home/CRTTRN/extract(RedoIE::validateConfig(log_context_t*, ggs::gglib::ggocicpp::ORAConnection*, ggs::gglib::ggdatas
+ource::DataSource*, ggs::gglib::ggapp::ReplicationContext*))]
+                          : [/apps/gg/home/CRTTRN/extract(RedoAPI::createInstance(ggs::gglib::ggdatasource::DataSource*, ggs::gglib::ggapp::ReplicationCon
+text*))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::er::OraTranLogDataSource::setup())]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::ggapp::ReplicationContext::establishStartPoints(char, ggs::gglib::ggdatasource::Data
+SourceParams const&))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::ggapp::ReplicationContext::initializeDataSources(ggs::gglib::ggdatasource::DataSourc
+eParams&))]
+                          : [/apps/gg/home/CRTTRN/extract()]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::MainThread::ExecMain())]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::Thread::RunThread(ggs::gglib::MultiThreading::Thread::ThreadArgs*))]
+                          : [/apps/gg/home/CRTTRN/extract(ggs::gglib::MultiThreading::MainThread::Run(int, char**))]
+                          : [/apps/gg/home/CRTTRN/extract(main)]
+                          : [/lib64/libc.so.6(__libc_start_main)]
+                          : [/apps/gg/home/CRTTRN/extract()]
+
+2024-03-29 05:13:56  ERROR   OGG-02028  Failed to attach to logmining server OGG$CRT01 error 1,292 - ORA-01292: LogMiner for upstream capture cannot find
+log file FILE 2_488_1163467046.dbf, THREAD 2, SEQUENCE 488, SCN 0x0000136ab4cf842a.
+
+2024-03-29 05:13:56  ERROR   OGG-01668  PROCESS ABENDING.
+
+
+GGSCI (dbc-prd-vm-3082) 13> view params CRT01
+
+EXTRACT CRT01
+
+SETENV (ORACLE_HOME='/oracle/product/19.3.0/ZCRTTRN')
+SETENV (ORACLE_SID = 'ZCRTTRN')
+SETENV (TNS_ADMIN='/oracle/product/19.3.0/ZCRTTRN/network/admin')
+SETENV (NLS_LANG = 'AMERICAN_AMERICA.AL32UTF8')
+
+USERIDALIAS ZCRTTRN
+
+TRANLOGOPTIONS INTEGRATEDPARAMS  (max_sga_size 2000)
+
+TRANLOGOPTIONS FETCHPARTIALLOB
+TRANLOGOPTIONS PERFORMANCEPROFILE HIGH
+TRANLOGOPTIONS CHECKPOINTRETENTIONTIME 1
+
+LOGALLSUPCOLS
+UPDATERECORDFORMAT FULL
+
+REPORTCOUNT EVERY 10 MINUTES, RATE
+WARNLONGTRANS 60MIN
+STATOPTIONS REPORTFETCH, RESETREPORTSTATS
+REPORT AT 02:00
+REPORTROLLOVER AT 02:00
+DISCARDROLLOVER at 00:00
+
+BR BRDIR /apps/gg/CRTTRN
+EXTTRAIL /apps/gg/CRTTRN/trail/cr
+
+SOURCECATALOG CRTTRN
+
+--include /apps/gg/home/CRTTRN/dirprm/inc/13431_CRT01.inc
+TABLE XXCCR.XXCCR_ATTR_ASSIGNMENTS;
+TABLE XXCCR.XXCCR_HMT_AGU_HIERARCHIES;
+TABLE XXCCR.XXCCR_PUB_CM_APV_TRANS;
+TABLE XXCCR.XXCCR_PUB_CM_TRANS_APV_DTLS;
+TABLE XXCPAM.XXCPAM_CUST_ACCT_RELATIONS;
+TABLE XXCRHUB.XXCRHUB_MCV_ACCT_MAP;
+TABLE XXCRHUB.XXCRHUB_MCV_ORG;
+TABLE XXCRHUB.XXCRHUB_MCV_PGTMV;
+TABLE XXCRHUB.XXCRHUB_MCV_PRODUCT;
+TABLE XXCRHUB.XXCRHUB_MCV_SITE_USE;
+TABLE XXCRHUB.XXCRHUB_MY_CUSTOMER_DTLS;
+TABLE XXGRID.XXGRID_CSC_FL_COUNTRY_MAPPING;
+TABLE XXGRID.XXGRID_CSC_GEO_COMPLETENESS;
+TABLE XXGRID.XXGRID_CSC_GEO_COMPLETENESS_EA;
+TABLE XXGRID.XXGRID_CSC_LOOKUPS;
+TABLE XXGRID.XXGRID_GEO_CERTIFIED_LEVEL;
+TABLE XXGRID.XXGRID_GEO_DENORM_ENTITIES;
+TABLE XXGRID.XXGRID_GEO_ENTITIES_REL;
+TABLE XXGRID.XXGRID_GEO_LOOKUPS;
+TABLE XXGRID.XXGRID_GEO_SECONDARY_NAMES;
+TABLE XXGRID.XXGRID_GEO_TOKEN_API;
+TABLE XXHMPCR.XXHMPCR_OE_GROUP_ENTITY;
+TABLE XXHMPCR.XXHMPCR_OE_CR_LINKAGE;
+TABLE XXHMPCR.OE_CR_LINKAGE;
+TABLE XXHMPCR.OE_GROUP_ENTITY;
+TABLE XXMDME.XXMDME_ATTR_ASSIGMENTS_STAGE;
+TABLE XXMDME.XXMDME_CPAM_CUST_ACC_MAP_STAGE;
+TABLE XXMDME.XXMDME_CPAM_CUST_ACC_REL_STAGE;
+TABLE XXMDME.XXMDME_MAPPING_STAGE;
+TABLE XXMDME.XXMDME_PARTY_STAGE;
+TABLE XXMDME.XXMDME_PGTMV_HIERARCHIES_STAGE;
+TABLE XXNGCR.XXNGCR_AM_ATTRIBUTES;
+TABLE XXNGCR.XXNGCR_AM_ATTRIBUTES_HIS;
+TABLE XXNGCR.XXNGCR_AM_LOOKUP_DTLS;
+TABLE XXNGCR.XXNGCR_DNM_RELATIONSHIPS;
+TABLE XXNGCR.XXNGCR_LOC_PUB_TRANSACTIONS;
+TABLE XXNGCR.XXNGCR_PARTY_ATTRIBUTES;
+TABLE XXNGCR.XXNGCR_PARTY_IDENTITY;
+TABLE XXNGCR.XXNGCR_PARTY_IDENTITY_HIST;
+TABLE XXNGCR.XXNGCR_PUB_CM_TRANSACTIONS;
+TABLE XXNGCR.XXNGCR_SOURCE_IMAGE;
+TABLE XXNGCR.XXNGCR_SOURCE_IMAGE_HIST;
+TABLE XXNGPP.XXNGPP_PUB_CM_PP_TRANS;
+TABLE XXNGPP.XXNGPP_PUB_CM_PP_TRANS_DTLS;
+TABLE XXSAV.XXSAV_CASE_ATTR_DETAILS;
+TABLE XXSAV.XXSAV_CASE_HEADER;
+TABLE XXSAV.XXSAV_CASE_PARTY_DETAILS;
+TABLE XXSAV.XXSAV_COMMENTS;
+--Huge transactions on the table filling up CACHEDIR
+TABLE XXSAV.XXSAV_CONFLICT_CBD;
+TABLE XXSAV.XXSAV_CONFLICT_GROUPS;
+TABLE XXSAV.XXSAV_CONFLICT_GRP_ACCOUNTS;
+TABLE XXSAV.XXSAV_CONFLICT_PARTY_EXT;
+--commenting as per actvity from prashanthi.
+TABLE XXSAV.XXSAV_GA_DETAILS;
+TABLE XXSAV.XXSAV_GBM_DTL;
+TABLE XXSAV.XXSAV_GBM_HDR;
+TABLE XXSAV.XXSAV_LOOKUPS;
+TABLE XXSAV.XXSAV_NODE_GEO_BDY_REL;
+TABLE XXSAV.XXSAV_NODE_RMID_REL;
+TABLE XXSAV.XXSAV_NSC_ATTRIBUTES;
+TABLE XXSAV.XXSAV_SA_ATTR_COVERAGE;
+TABLE XXSAV.XXSAV_SA_ATTR_GEO_BDY;
+TABLE XXSAV.XXSAV_SA_ATTR_NODE;
+TABLE XXSAV.XXSAV_SA_ATTR_OWNER;
+TABLE XXSAV.XXSAV_SA_ATTR_PROGRAM;
+TABLE XXSAV.XXSAV_SALES_ACCOUNTS;
+TABLE XXSAV.XXSAV_SALES_ACCT_MEMBERS;
+TABLE XXSAV.XXSAV_SAM_DETAILS;
+TABLE XXSAV.XXSAV_SEGMENTS;
+TABLE XXSAV.XXSAV_SG_SAM_DETAILS;
+TABLE XXSAV.XXSAV_SHR_CR_CE_SOAC_SUMMARY;
+TABLE XXSAV.XXSAV_TEMPLATE_SAM_DETAILS;
+TABLE XXCPAM.XXCPAM_HZ_ORGANIZATION_PROFILE;
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCT_RELATE_ALL;
+TABLE XXCPAM.XXCPAM_HZ_CUST_PROFILE_AMTS;
+TABLE XXCPAM.XXCPAM_HZ_CONTACT_POINTS;
+TABLE XXCPAM.XXCPAM_HZ_ORG_CONTACT_ROLES;
+TABLE XXCPAM.XXCPAM_HZ_ROLE_RESPONSIBILITY;
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCOUNT_ROLES;
+TABLE XXCPAM.XXCPAM_HZ_ORG_CONTACTS;
+TABLE XXCPAM.XXCPAM_HZ_RELATIONSHIPS;
+TABLE XXCPAM.XXCPAM_HZ_CUST_SITE_USES_ALL;
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCT_SITES_ALL;
+TABLE XXCPAM.XXCPAM_HZ_PARTY_SITES;
+TABLE XXCPAM.XXCPAM_HZ_PARTY_SITE_USES;
+TABLE XXCPAM.XXCPAM_HZ_LOCATIONS;
+TABLE XXCPAM.XXCPAM_HZ_CUST_ACCOUNTS;
+TABLE XXCPAM.XXCPAM_HZ_PARTIES;
+TABLE XXCPAM.XXCPAM_RA_TERMS_TL;
+TABLE XXNGPP.XXNGPP_DNM_RELATIONSHIPS;
+TABLE XXCCR.XXCCR_PGTMV_EDW_COUNTRY_GRP;
+TABLE XXNGPP.XXNGPP_DNM_PERSON_PROFILE;
+TABLE XXCCR.XXCCR_DNM_PGTMV_HIERARCHY;
+
+--SBP Tables
+TABLE XXGRID.COUNTRYISO;
+TABLE XXCCR.XXCCR_GROUP_PARTIES_REFERENCES;
+TABLE XXCCR.XXCCR_GROUP_PARTIES;
+
+TABLE XXCSAV.XXCSA_DNM_RELATIONSHIPS;
+
+TABLE XXCSAV.XXCSA_DNM_SNAPSHOT_INCR;
+
+
+
+GGSCI (dbc-prd-vm-3082) 14> dblogin USERIDALIAS ZCRTTRN
+Successfully logged into database CDB$ROOT.
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 15> info exttrail
+
+       Extract Trail: /apps/gg/CRTTRN/trail/cr
+        Seqno Length: 9
+   Flip Seqno Length: no
+             Extract: CRT01
+               Seqno: 15
+                 RBA: 70725761
+           File Size: 500M
+
+       Extract Trail: /apps/gg/CRTTRN/trail02/cr
+        Seqno Length: 9
+   Flip Seqno Length: no
+             Extract: CRT02
+               Seqno: 13
+                 RBA: 152773812
+           File Size: 500M
+
+       Extract Trail: /apps/gg/REMOTE01/CRTTRN/CRTMT01/cr
+        Seqno Length: 9
+   Flip Seqno Length: no
+             Extract: CRTMT01
+               Seqno: 12
+                 RBA: 71846386
+           File Size: 500M
+
+       Extract Trail: /apps/gg/REMOTE01/CRTTRN/CRTMT02/cr
+        Seqno Length: 9
+   Flip Seqno Length: no
+             Extract: CRTMT02
+               Seqno: 15
+                 RBA: 155068881
+           File Size: 500M
+
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 16> unregister extract CRT01 database
+
+2024-03-29 05:18:49  INFO    OGG-01750  Successfully unregistered EXTRACT CRT01 from database.
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 17> register extract CRT01 database container(CRTTRN)
+
+2024-03-29 05:19:11  ERROR   OGG-01891  EXTRACT CRT01 must first be deleted before it can be registered.
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 18> delete CRT01
+
+2024-03-29 05:19:23  INFO    OGG-14052  No Heartbeat entries with [CRT01], none deleted.
+Deleted EXTRACT CRT01.
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 19> register extract CRT01 database container(CRTTRN)
+
+2024-03-29 05:20:03  ERROR   OGG-08221  Cannot register or unregister EXTRACT CRT01 because of the following SQL error: OCI Error ORA (status = 4098-ORA-04098: trigger 'CISCO_DBLINKADM.DB_LINK_CHECK' is invalid and failed re-validation
+ORA-06512: at "SYS.DBMS_STREAMS_ADM_IVK", line 766
+ORA-06512: at "SYS.DBMS_AQADM", line 416
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 3883
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 4451
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 3495
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 536
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 206
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 298
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 495
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 3465
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 4193
+ORA-06512: at "SYS.DBMS_AQADM_SYS", line 3861
+ORA-06512: at "SYS.DBMS_AQADM", line 407
+ORA-06512: at "SYS.DBMS_STREAMS_ADM_IVK", line 635
+ORA-06512: at "SYS.DBMS_STREAMS_ADM", line 269
+ORA-06512: at line 1
+).
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 20> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     RUNNING     CRT02       00:00:02      00:00:08
+EXTRACT     RUNNING     CRTMT01     00:00:00      00:00:09
+EXTRACT     RUNNING     CRTMT02     00:00:00      00:00:03
+
+
+GGSCI (dbc-prd-vm-3082 as ggadm@ZCRTTRN2/CDB$ROOT) 21>

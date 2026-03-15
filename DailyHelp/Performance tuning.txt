@@ -1,0 +1,164 @@
+Check progress of an SQL
+========================
+
+select m.sql_id ,m.sql_plan_hash_value ,p.id,
+    rpad(' ',p.depth*2, ' ')||p.operation ||'   ' || p.options  operation,
+    p.object_name object,
+    p.cardinality card,
+    p.cost cost,
+    substr(m.status,1,4) status,
+    m.output_rows
+    from gv$sql_plan p, gv$sql_plan_monitor m , gv$sql_monitor s
+    where p.sql_id=m.sql_id
+    and p.child_address=m.sql_child_address
+    and p.plan_hash_value=m.sql_plan_hash_value
+    and p.id=m.plan_line_id
+   -- AND s.sid = 5756
+    --AND s.inst_id = 1
+     AND s.sql_id = '73rqdb9ntfg9h'
+   -- AND substr(m.status,1,4)  = 'EXEC'
+   -- and m.sql_exec_id= 150999526
+    AND s.inst_id = m.inst_id
+    AND s.inst_id = p.inst_id
+    and s.key = m.key
+    order by id;
+	
+	
+	
+	
+SELECT sample_time,
+         sql_id,
+         event,
+         current_obj#,
+         blocking_session,
+         blocking_session_serial#,
+         blocking_inst_id
+    FROM gv$active_session_history a
+   WHERE session_id = 3514 AND session_serial# = 12065
+ORDER BY sample_time DESC;--this is to check progress of the session
+
+
+
+
+Check plan changed of an SQL
+============================
+
+SELECT TRUNC (s.end_interval_time) sample_end,
+         MIN (q.snap_id) min_snapid,
+         MAX (q.snap_id) max_snapid,
+         MAX(Q.DBID) DBID,
+        q.sql_id,
+         q.plan_hash_value PHV,
+         q.module,
+         SUM (q.EXECUTIONS_DELTA) exec,
+         SUM (ELAPSED_TIME_delta) / 1000 / 1000 SEC_Total,
+         SUM (q.parse_calls_DELTA) HParse,
+         SUM (q.version_count) vers,
+         CEIL (
+            ROUND (
+               SUM (DISK_READS_delta) / GREATEST (SUM (executions_delta), 1),
+               1))
+            pio_exec,
+         CEIL (
+            ROUND (
+               SUM (BUFFER_GETS_delta) / GREATEST (SUM (executions_delta), 1),
+               1))
+            lio_exec,
+         ROUND (
+            (SUM (IOWAIT_DELTA) / GREATEST (SUM (executions_delta), 1) / 1000),
+            1)
+         / 1000
+            IO_Wait,
+         ROUND (
+            (SUM (CPU_TIME_DELTA) / GREATEST (SUM (executions_delta), 1) / 1000),
+            1)
+         / 1000
+            CPU_Wait,
+         ROUND (
+            (SUM (rows_processed_delta) / GREATEST (SUM (executions_delta), 1)),
+            1)
+            Rows_exec,
+         CEIL (
+            ROUND (
+               SUM (BUFFER_GETS_delta) / GREATEST (SUM (executions_delta), 1),
+               1))
+         / DECODE (
+              TRUNC(ROUND (
+                 (SUM (rows_processed_delta)
+                  / GREATEST (SUM (executions_delta), 1)),
+                 1)),
+              0, 1,
+              ROUND (
+                 (SUM (rows_processed_delta)
+                  / GREATEST (SUM (executions_delta), 1)),
+                 1))
+            LIO_PER_ROW,
+         ROUND (
+            (ROUND (
+                (  SUM (ELAPSED_TIME_delta)
+                 / GREATEST (SUM (executions_delta), 1)
+                 / 1000),
+                1)
+             / 1000),
+            4)
+         || 'S/'
+         || ROUND (
+               (ROUND (
+                   (  SUM (ELAPSED_TIME_delta)
+                    / GREATEST (SUM (executions_delta), 1)
+                    / 1000),
+                   1)
+                / (1000 * 60)),
+               4)
+         || 'M'
+            exec_time,
+         /*(SELECT (SELECT reference
+                    FROM xxcpf_pm_sql_statement_fix
+                   WHERE ROWNUM = 1
+                         AND (hash_value = q.plan_hash_value
+                              OR hash_value =
+                                    (SELECT DBMS_UTILITY.
+                                             SQLID_TO_SQLHASH (q.sql_id)
+                                       FROM DUAL)))
+            FROM DUAL)
+            defect_id,*/
+            parsing_schema_name,
+            SQL_profile
+    FROM dba_hist_sqlstat q, dba_hist_snapshot s
+   WHERE     q.SQL_ID = TRIM ('&sql_id')
+         AND s.snap_id = q.snap_id
+         AND s.dbid = q.dbid
+         AND s.instance_number = q.instance_number
+GROUP BY q.sql_id, q.plan_hash_value,q.module, TRUNC (s.end_interval_time), parsing_schema_name,SQL_profile
+ORDER BY 1 DESC, q.sql_id, q.plan_hash_value;
+
+
+
+Session accessing a particular object
+=====================================
+
+SELECT 
+    s.inst_id,
+    s.sid,
+    s.serial#,
+    s.username,
+    s.osuser,
+    s.status,
+    s.program,
+    a.inst_id AS access_inst_id,
+    a.owner,
+    a.object
+FROM 
+    gv$session s
+JOIN 
+    gv$access a ON s.inst_id = a.inst_id AND s.sid = a.sid
+WHERE 
+    a.object = UPPER('XXMDM_SCENARIO_PKG')  -- Replace with object name
+ --   AND a.owner = UPPER('<schema_name>')
+    ;   -- Optional: Replace with owner/schema
+	
+	
+	
+	
+	
+	

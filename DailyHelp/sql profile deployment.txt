@@ -1,0 +1,77 @@
+SQL profile deployment -
+
+###########################################################################################
+**************Profiles has to be deployed in PDB level*************************************
+###########################################################################################
+
+First , check SIDS for the sql running in DB . Need to stop all the SIDS running to for SQL profile deployment . Ask App team to clear the sessions .
+
+SQL> select INST_ID , SID , SERIAL# , SQL_ID from gv$session where SQL_ID='ctxrmjt39a62a' ;
+
+
+check if any programs are using this sql id -
+
+SQL>select distinct module from gv$active_session_history where sql_id='ctxrmjt39a62a';
+
+Find out which node old SQL profile present -
+
+SQL> select address ,inst_id , hash_value from gv$sqlarea where sql_id like 'ctxrmjt39a62a';
+
+ADDRESS             INST_ID HASH_VALUE
+---------------- ---------- ----------
+00000006F6127B90          9 1184176202
+0000001585A68770          1 1184176202
+00000009E6FD1E80          2 1184176202
+
+
+Now flushing hash value of old sql profile -
+Login to all the nodes were the sql profile hash value is present -
+
+run according to the hash value of a particular node
+
+SQL> connect / as sysdba
+Connected.
+SQL> exec dbms_shared_pool.purge('00000006F6127B90,1184176202','S');
+
+SQL> exec dbms_shared_pool.purge('0000001585A68770,1184176202','S');
+
+SQL> exec dbms_shared_pool.purge('00000009E6FD1E80,1184176202','S');
+
+PL/SQL procedure successfully completed.
+
+after clearing , there should be no remaining hash values present .
+
+SQL> select address ,inst_id , hash_value from gv$sqlarea where sql_id like 'b9hqr0ft6v6zs';
+
+no rows selected
+
+Hence , SQL profile flushed .
+
+To check sqlid profile modified date -
+select name,CREATED,last_modified from dba_sql_profiles where name like '%b9hqr0ft6v6zs%';
+
+4)Deploying Sql Profile -
+SQL> @/tmp/SQL_Profile.txt
+
+PL/SQL procedure successfully completed.
+
+Recheck sqlid profile modified date -
+select name,CREATED,last_modified from dba_sql_profiles where name like '%b9hqr0ft6v6zs%';
+
+SQL Profile Deployment done .
+
+
+
+
+
+
+
+
+
+
+How to disable sql profile
+---------------------------
+EXEC DBMS_SQLTUNE.ALTER_SQL_PROFILE('PROFILE_gtt53cwdh16ua','STATUS','DISABLED');
+
+
+

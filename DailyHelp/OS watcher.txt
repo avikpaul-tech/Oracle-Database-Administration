@@ -1,0 +1,13 @@
+OSWATCHER
+=========
+ps -ef | grep oswbb
+
+mkdir /tmp/avikpau
+
+chmod 777  /tmp/avikpau
+
+cd /oracle/export/oswbb/archive
+
+find . -name "*24.07.27.1200*" -exec ls -lrth {} \;
+
+find . -name "*24.07.27.1200*" -print -exec zip /tmp/OS_Watcher_"$HOSTNAME"_27072024.gz {} \;

@@ -1,0 +1,40 @@
+STEP 1.GO TO THE DIRECTORY
+--------------------------
+cd /oracle/product/OEM/emagent/agent_inst/bin
+
+STEP 2.CHECK THE METRIC
+-----------------------
+sudo -u oracle ./emctl status agent scheduler|grep -i Erp_Node_Level_URL_PDB
+
+STEP 3. RUN EMD MANUALLY
+------------------------
+sudo -u oracle ./emctl control agent runcollection YTS3G2C_TS3G2C:oracle_pdb 'ME$Erp_Node_Level_URL_PDB'
+
+
+
+cd /oracle/product/OEM/emagent/agent_inst/bin
+./emctl stop agent
+./emctl status agent
+./emctl clearstate agent
+./emctl start agent 
+./emctl upload agent 
+./emctl status agent
+
+
+
+Agent Status ======  EMSTA
+Stop Agent ======  EMSTP
+Clear State Agent ======  EMCLR
+Start Agent ======  EMSTR
+Upload Agent ======  EMUPD
+Agent Status ======  EMSTA
+
+
+/usr/tools/oracle/Standard/script/DBClinic/logs/oracle_agent_status_dbc-prd1-3042_ZCFSPRD2_15_Sep_2025_04_53_07.log
+/usr/tools/oracle/Standard/script/DBClinic/logs/oracle_agent_stop_dbc-prd1-3042_ZCFSPRD2_15_Sep_2025_04_53_32.log
+/usr/tools/oracle/Standard/script/DBClinic/logs/oracle_agent_clear_dbc-prd1-3042_ZCFSPRD2_15_Sep_2025_04_54_10.log
+
+
+ME$Chk_redo_logfile collection
+
+ME$Erp_Node_Level_URL_PDB collection

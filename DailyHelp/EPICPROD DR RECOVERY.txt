@@ -1,0 +1,59 @@
+1.Enable BO
+
+/oracle/product/OEM/emagent/agent_inst/bin/emctl start blackout "dr_recovery" -nodeLevel -d 12:00
+
+2.Shutdown all instances
+
+SQL>shutdown immediate
+
+3.Open instance 1 in nomount mode
+
+SQL>startup nomount
+
+4.Keep backup of the current control files
+
+SQL>show parameter control
+
+cp /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_01.dbf /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_01_bkp_11032024.dbf
+
+cp /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_02.dbf /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_02_bkp_11032024.dbf
+
+cp /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_03.dbf /oracle/oradata/ZEPICPRD/fs01/ZEPICPRD/control_03_bkp_11032024.dbf
+
+5.Connect to the RMAN prompt
+
+rman
+RMAN>CONNECT TARGET "SYSBACKUP/Manager91 AS SYSBACKUP"
+
+6.Restore standby control file from primary
+
+RMAN>RESTORE STANDBY CONTROLFILE FROM SERVICE ZEPICPRD_PRIMARY;
+
+7.Open database instance 1 in mount mode
+
+SQL>alter database mount;
+
+##7.Restore affected datafile from primary
+
+##RMAN>RESTORE DATAFILE '/oracle/oradata/EPICPROD/fs01/XXB2BREPORTTAB_1125.dbf' FROM SERVICE ZEPICPRD_PRIMARY;
+
+8.Recover database using service name recovery
+
+
+rman
+RMAN>CONNECT TARGET "SYSBACKUP/Manager91 AS SYSBACKUP"
+RMAN>RECOVER DATABASE FROM SERVICE "ZEPICPRD_PRIMARY" NOREDO SECTION SIZE 8000M; 
+
+
+9.Open all instances in read only mode
+
+SQL>alter database open read only;
+
+10.Start MRP
+
+SQL>alter database recover managed standby database nodelay disconnect from session;
+
+11.Disable BO
+
+/oracle/product/OEM/emagent/agent_inst/bin/emctl stop blackout "dr_recovery"
+

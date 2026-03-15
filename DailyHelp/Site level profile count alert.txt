@@ -1,0 +1,32 @@
+SELECT pot.user_profile_option_name "Profile"
+ , DECODE( a.profile_option_value
+          , '1', '1 (may be "Yes")'
+          , '2', '2 (may be "No")'
+          , a.profile_option_value) "Value"
+ , DECODE( a.level_id
+          , 10001, 'Site'
+          , 10002, 'Appl'
+          , 10003, 'Resp'
+          , 10004, 'User'
+          , '????') "Levl"
+ , DECODE( a.level_id
+          , 10002, e.application_name
+          , 10003, c.responsibility_name
+          , 10004, d.user_name
+          , '-') "Location"
+, to_char(a.last_update_date,'DD-MON-YYYY HH24:MI:SS') "Last Modified"
+FROM applsys.fnd_application_tl e
+ , applsys.fnd_user d   , applsys.fnd_responsibility_tl c
+ , applsys.fnd_profile_option_values a   , applsys.fnd_profile_options b
+ , applsys.fnd_profile_options_tl pot
+WHERE
+ a.level_id = 10001 and
+ pot.profile_option_name = b.profile_option_name
+ AND b.application_id = a.application_id (+)
+ AND b.profile_option_id = a.profile_option_id (+)
+ AND a.level_value = c.responsibility_id (+)
+ AND a.level_value = d.user_id (+)   AND a.level_value = e.application_id
+(+)
+AND a.last_update_date>sysdate-(nvl('&hours',1))/24
+ ORDER BY a.last_update_date,"Profile", "Levl", "Location", "Value"
+;

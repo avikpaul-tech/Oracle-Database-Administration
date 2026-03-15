@@ -1,0 +1,73 @@
+======================================
+DR Node:-
+
+SELECT PROCESS, STATUS FROM GV$MANAGED_STANDBY where PROCESS='MRP0';
+SELECT PROCESS, STATUS,SEQUENCE#,THREAD#  FROM GV$MANAGED_STANDBY where PROCESS='MRP0';
+select round((sysdate-max(first_time))*24,2) "Hours Behind" from v$log_history; 
+
+if Service name recovery.
+
+1. Take the dbf file name/count using current running ctl file .
+
+set pages 300
+set lines 300
+col name for a60
+select name,creation_time from v$datafile order by creation_time; - copy the o/p in notepad ==== A
+
+2. Stop MRP and shut down both DR instance.
+
+ALTER DATABASE RECOVER MANAGED STANDBY DATABASE cancel;
+shut immediate;
+
+3. start the first or second instnace in nomount state.
+
+startup nomount;
+
+4. connect the rman prompt and create ctl file from primary using primary db_unique_name/service name.
+
+rman
+CONNECT TARGET "SYSBACKUP/test11g AS SYSBACKUP"
+connect catalog rman_zdwhprd/XB_7r_h4Q0@rcatprod
+RUN
+{
+ALLOCATE CHANNEL c1 DEVICE TYPE disk;
+ALLOCATE CHANNEL c2 DEVICE TYPE disk;
+RESTORE STANDBY CONTROLFILE FROM SERVICE ZDWHPRD;
+}
+
+5. place the db in mount state using new control file in rman prompt
+
+ALTER DATABASE MOUNT;
+exit
+
+6. check the db status 
+
+set lines 1000
+set pages 60
+col host_name format a25
+select INST_ID,INSTANCE_NAME,HOST_NAME,VERSION,to_char(STARTUP_TIME,'DD-MON-RRRR HH:MM:SS') "STARTUP_TIME",STATUS,LOGINS from gv$instance order by 1;
+select name, open_mode , FS_FAILOVER_STATUS, FS_FAILOVER_OBSERVER_PRESENT, DATABASE_ROLE from gv$database;
+
+
+7. start the service name recovery:
+
+rman
+CONNECT TARGET "SYSBACKUP/test11g AS SYSBACKUP"
+RUN
+{
+ALLOCATE CHANNEL c1 DEVICE TYPE disk;
+ALLOCATE CHANNEL c2 DEVICE TYPE disk;
+ALLOCATE CHANNEL c3 DEVICE TYPE disk;
+ALLOCATE CHANNEL c4 DEVICE TYPE disk;
+ALLOCATE CHANNEL c5 DEVICE TYPE disk;
+ALLOCATE CHANNEL c6 DEVICE TYPE disk;
+ALLOCATE CHANNEL c7 DEVICE TYPE disk;
+ALLOCATE CHANNEL c8 DEVICE TYPE disk;
+RECOVER DATABASE FROM SERVICE "ZDWHPRD" NOREDO SECTION SIZE 8000M; 
+}
+
+
+8. Start the second/first instance in mount state, start the MRP.
+
+alter database recover managed standby database nodelay disconnect from session; 
+

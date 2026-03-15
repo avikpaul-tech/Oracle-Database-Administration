@@ -1,0 +1,59 @@
+##AWR Generation failed due to AWR Generation failed due to error ORA-12850:
+============================================================================
+
+-rw-r-----.  1 oracle dba  112 Sep 24 05:04 ZTTMPRD4_awrpt_log_3613294.log
+-rw-r-----.  1 oracle dba  11K Sep 24 05:04 ZTTMPRD4_awrpt_log_3613294.dbg
+-rw-r-----.  1 oracle dba 4.0M Sep 24 05:04 awr_parser.log
+
+
+ls -lrth *_awrpt_log*
+ls -lrth awr_parser.log
+
+
+
+##AWR Generation failed due to AWR Generation failed due to error ORA-13605:
+============================================================================
+
+
+
+
+
+
+##AWR Generation failed due to SCRIPT_NOT_FOUND
+===============================================
+
+cd /usr/tools/oracle/Standard/sql
+
+/usr/tools/oracle/Standard/sql > ls -l csco_awrreport_10g*.sql
+-rwxr-xr-x. 1 oracle dba 8497 Sep 26 06:57 csco_awrreport_10g_pdb.sql
+-rwxr-xr-x. 1 oracle dba 8460 Mar  4  2013 csco_awrreport_10g.sql
+
+Copy to the /tmp location of the working env
+--------------------------------------------
+cp -p csco_awrreport_10g*.sql /tmp
+
+Copy to the jump host
+---------------------
+cd /tmp 
+scp csco_awrreport_10g*.sql jmp-lnx-bgl-01:/users/avikpau
+
+Change permission in jump host
+------------------------------
+chmod 755 csco_awrreport_10g*.sql
+
+Copy from the jump host
+-----------------------
+cd /usr/tools/oracle/Standard/sql
+
+scp avikpau@jmp-lnx-bgl-01:/users/avikpau/csco_awrreport_10g*.sql .
+
+
+---------------------------------------------------------------------
+scp csco_awrreport_10g*.sql dbc-prd1-3011:/usr/tools/oracle/Standard/sql
+
+scp avikpau@jmp-lnx-bgl-01:/users/avikpau/csco_awrreport_10g.sql .
+
+
+
+
+scp avikpau@jmp-lnx-bgl-01:/users/avikpau/csco_awrreport_10g_pdb.sql .

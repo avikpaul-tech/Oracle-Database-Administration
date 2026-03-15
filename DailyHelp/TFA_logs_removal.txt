@@ -1,0 +1,67 @@
+TFA logs Manajor Contributors are from below locations:
+/opt/oracle.ahf/data/dbc-pts1-2116/orachk/user_root/output/
+/opt/oracle.ahf/data/repository/collection*
+
+1 . We need to login as oracle user and remove with below command.
+
+Goto Path :
+
+1. cd /opt/oracle.ahf/data/dbc-pts1-2116/orachk/user_root/output/
+2. ls -ld orachk* |wc -l
+
+leaving few latest files(2 days) - Give the count below command(head -1490) and execute it. It will write the file removal command /tmp/testm.txt 
+and later executes and removes /tmp/testm.txt  after execution.
+
+3.Execute below command
+ls -ld orachk* |head -1490 |awk {'print "sudo rm -rf "$9'}>/tmp/testm.txt && sh /tmp/testm.txt && rm -f /tmp/testm.txt
+
+----------------------------------------
+2. Path 2 
+cd /opt/oracle.ahf/data/repository/
+
+1.Take Count of collection* directories (These are TFA old logs and safe to remove)
+
+sudo ls -ld /opt/oracle.ahf/data/repository/collection* |wc -l
+
+2.Give the count in below command in (head -1490) and execute below command.
+
+ls -ld collect* |head -1490 |awk {'print "sudo rm -rf "$9'}>/tmp/testm.txt && sh /tmp/testm.txt && rm -f /tmp/testm.txt
+
+=======================================================
+Example 1 : Sample files :
+[sa-limit@dbc-pts1-2116 ~]$ sudo ls -lrth /opt/oracle.ahf/data/dbc-pts1-2116/orachk/user_root/output/
+drwx--x--t. 8 root root 4.0K Jun 28  2022 orachk_dbc-pts1-2116_YTS3CSF_062822_020310_autostart_client_oratier1
+drwx--x--t. 8 root root 4.0K Jun 29  2022 orachk_dbc-pts1-2116_YTS3CSF_062922_020336_autostart_client_oratier1
+drwx--x--t. 8 root root  260 Jun 30  2022 orachk_dbc-pts1-2116_YTS3CSF_063022_020334_autostart_client_oratier1
+drwx--x--t. 8 root root  260 Jul  1  2022 orachk_dbc-pts1-2116_YTS3CSF_070122_020325_autostart_client_oratier1
+drwx--x--t. 8 root root  252 Jul  2  2022 orachk_dbc-pts1-2116_070222_020319_autostart_client_oratier1
+drwx--x--t. 8 root root  260 Jul  4  2022 orachk_dbc-pts1-2116_YTS3CSF_070422_020318_autostart_client_oratier1
+drwx--x--t. 8 root root 4.0K Jul  5  2022 orachk_dbc-pts1-2116_YTS3CSF_070522_020339_autostart_client_oratier1
+drwx--x--t. 8 root root 4.0K Jul  6  2022 orachk_dbc-pts1-2116_YTS3CSF_070622_02036_autostart_client_oratier1
+drwx--x--t. 8 root root  257 Jul  7  2022 orachk_dbc-pts1-2116_YTS3CSF_070722_02038_autostart_client_oratier1
+drwx--x--t. 8 root root  259 Jul  8  2022 orachk_dbc-pts1-2116_YTS3CSF_070822_020315_autostart_client_oratier1
+drwx--x--t. 8 root root  258 Jul 11  2022 orachk_dbc-pts1-2116_YTS3CSF_071122_02036_autostart_client_oratier1
+drwx--x--t. 8 root root  257 Jul 12  2022 orachk_dbc-pts1-2116_YTS3CSF_071222_02032_autostart_client_oratier1
+drwx--x--t. 8 root root  259 Jul 13  2022 orachk_dbc-pts1-2116_YTS3CSF_071322_020312_autostart_client_oratier1
+drwx--x--t. 8 root root  260 Jul 14  2022 orachk_dbc-pts1-2116_YTS3CSF_071422_020329_autostart_client_oratier1
+drwx--x--t. 8 root root  260 Jul 15  2022 orachk_dbc-pts1-2116_YTS3CSF_071522_020326_autostart_client_oratier1
+
+
+Exampple 2 / path 2 :
+sa-limit@dbc-pts1-2116 ~]$ sudo ls -ld /opt/oracle.ahf/data/repository/collection*
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_05_14_07_GMT_2022_node_dbc-pts1-2125
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_05_20_33_GMT_2022_node_dbc-pts1-2118
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_05_38_31_GMT_2022_node_dbc-pts1-2118
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_05_45_51_GMT_2022_node_dbc-pts1-2118
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_05_56_57_GMT_2022_node_dbc-pts1-2121
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_06_02_28_GMT_2022_node_dbc-pts1-2121
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_06_19_30_GMT_2022_node_dbc-pts1-2121
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_06_37_23_GMT_2022_node_dbc-pts1-2121
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_06_51_35_GMT_2022_node_dbc-pts1-2124
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_08_22_39_GMT_2022_node_dbc-pts1-2117
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_08_53_47_GMT_2022_node_dbc-pts1-2124
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_09_07_08_GMT_2022_node_dbc-pts1-2124
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_03_09_19_08_GMT_2022_node_dbc-pts1-2124
+/opt/oracle.ahf/data/repository/collection_Sat_Dec_17_02_20_04_GMT_2022_node_dbc-pts1-2124
+
+

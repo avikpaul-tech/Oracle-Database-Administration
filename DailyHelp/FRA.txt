@@ -1,0 +1,36 @@
+FLASH REOVERY AREA
+==================
+set lines 500
+select * from v$flash_recovery_area_usage where FILE_TYPE='FLASHBACK LOG';
+show parameter db_recovery_file_dest_size
+show parameter db_flashback_retention_target
+
+Take the above query output in the notepad..
+
+Set the below parameter with lower values, then set it back to original values
+------------------------------------------------------------------------
+alter system set db_flashback_retention_target = 20 scope=both;
+alter system set db_recovery_file_dest_size=2G scope=both;
+
+
+alter system set db_flashback_retention_target = 240 scope=both;
+alter system set db_recovery_file_dest_size=200G scope=both;
+
+
+FILE_TYPE               PERCENT_SPACE_USED PERCENT_SPACE_RECLAIMABLE NUMBER_OF_FILES     CON_ID
+----------------------- ------------------ ------------------------- --------------- ----------
+FLASHBACK LOG                        98.72                      1.22             405          0
+
+SQL>
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_recovery_file_dest_size           big integer 800G
+SQL>
+NAME                                 TYPE        VALUE
+------------------------------------ ----------- ------------------------------
+db_flashback_retention_target        integer     240
+
+
+alter system set db_recovery_file_dest_size=400G scope=both SID='*';
+
+alter system set db_recovery_file_dest_size=500G scope=both SID='*';

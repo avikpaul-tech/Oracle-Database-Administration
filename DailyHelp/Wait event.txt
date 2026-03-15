@@ -1,0 +1,162 @@
+EVLK DBC SCRIPT SQL QUERY
+--------------------------
+
+column event format a40
+set pagesize 80 feed off
+
+select b.event,count(*),avg(b.wait_time)
+from gv$session a,gv$session_wait b
+where a.sid = b.sid
+--and a.type != 'BACKGROUND'
+and b.wait_time=0
+group by b.event
+order by 2;
+
+
+
+
+
+set linesize 300 verify off
+set pagesize 1000
+col username for a12
+col osuser for a12
+col machine format a20
+col p1text format a15
+col p2text format a15
+col program format a25
+col event format a30
+set head on
+select
+       w.sid,
+       w.serial#,
+       x.p1,
+       x.p1text,
+       x.p2,
+       x.p2text,
+       nvl(w.program, nvl(p.program, '<unknown program>')) program,
+       w.username,
+       w.osuser,
+       w.machine,
+       x.event,
+       w.sql_hash_value
+from gv$session w, gv$session_wait x,
+     gv$process p
+where w.sid = x.sid
+and p.background is null
+and w.paddr = p.addr (+)
+and x.event like '%&pl_enter_the_event_name%'
+order by machine;
+exit;
+
+
+===================================================================================
+
+
+
+select 
+	INST_ID,SID,
+	SERIAL#,
+	USER#,
+	USERNAME,
+	EVENT,
+	STATUS,
+	LOGON_TIME,
+	SQL_ID,
+	MACHINE,
+	BLOCKING_SESSION,
+	BLOCKING_INSTANCE,
+	MODULE,
+	STATE 
+from gv$session 
+--where event like '%library%'
+--where event like '%gc buffer busy%'
+--where event like '%db file sequential read%'
+--where event like '%log file sync%'
+where event like '%enq: TM%'
+order by username
+;
+
+
+
+Locking session
+================
+SELECT
+         lh.inst_id Locking_Inst,
+         lh.sid Locking_Sid,
+         sh.serial# locking_serial,
+         sh.module,
+         lw.inst_id Waiting_Inst,
+         lw.sid Waiter_Sid,
+         sw.serial# waiter_serial,
+         round(sws.seconds_in_wait/60) wait_in_min,
+         sw.module,
+         decode ( lh.type, 'MR', 'Media_recovery', 'RT', 'Redo_thread', 'UN', 'User_name', 'TX', 'Transaction',
+                   'TM', 'Dml', 'UL', 'PLSQL User_lock', 'DX', 'Distrted_Transaxion', 'CF', 'Control_file', 'IS',
+                   'Instance_state', 'FS', 'File_set', 'IR', 'Instance_recovery', 'ST', 'Diskspace Transaction',
+                   'IV', 'Libcache_invalidation', 'LS', 'LogStaartORswitch', 'RW', 'Row_wait', 'SQ', 'Sequence_no', 'TE',
+                   'Extend_table', 'TT', 'Temp_table', 'Nothing-' ) Waiter_Lock_Type,
+        decode ( lw.request, 0, 'None', 1, 'NoLock', 2, 'Row-Share', 3, 'Row-Exclusive', 4,
+                  'Share-Table', 5, 'Share-Row-Exclusive', 6, 'Exclusive', 'Nothing-' ) Waiter_Mode_Req
+  FROM
+          gv$lock lw,
+          gv$lock lh,
+          gv$session sw,
+          gv$session sh,
+          gv$session_wait sws
+  WHERE
+          lh.id1=lw.id1
+          AND lh.id2=lw.id2
+          AND lh.request=0
+          AND lw.lmode=0
+          AND (lh.id1,lh.id2) in
+                  ( SELECT id1,id2 FROM gv$lock WHERE request=0 INTERSECT SELECT id1,id2 FROM gv$lock WHERE lmode=0 )
+          AND sw.sid = lw.sid
+          AND lh.sid = sh.sid
+          AND sw.sid = sws.sid
+          AND sw.inst_id=sws.inst_id
+          AND lw.inst_id=sws.inst_id
+          AND lw.inst_id=sw.inst_id
+          AND lh.inst_id=sh.inst_id
+          AND sws.wait_time = 0
+          AND sws.event like 'enq%'
+          AND sws.seconds_in_wait/60 >(nvl('&mins',0))
+  ORDER BY 1,8;
+============================================================
+
+Check the instance wise count
+------------------------------
+
+select a.inst_id,b.event,count(*),avg(b.wait_time)
+from gv$session a,gv$session_wait b
+where a.sid = b.sid
+--and a.type != 'BACKGROUND'
+and b.wait_time=0
+group by a.inst_id,b.event
+order by 1,3 desc;
+
+
+Filter session by instance_id and event name
+---------------------------------------------
+
+select
+       w.INST_ID, 
+       w.sid,
+       w.serial#,
+       x.p1,
+       x.p1text,
+       x.p2,
+       x.p2text,
+       nvl(w.program, nvl(p.program, '<unknown program>')) program,
+       w.username,
+       w.osuser,
+       w.machine,
+       x.event,
+       w.sql_hash_value
+from gv$session w, gv$session_wait x,
+     gv$process p
+where w.sid = x.sid
+and p.background is null
+and w.paddr = p.addr (+)
+and w.inst_id=(&please_enter_the_instance_id)
+and x.event like '%&please_enter_the_event_name%'
+order by machine;

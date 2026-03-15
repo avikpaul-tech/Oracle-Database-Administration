@@ -1,0 +1,66 @@
+Dashboard SQL Query
+====================
+select TARGET_NAME,host_name,message,reason
+ from em_admin.notification_log_master
+ where severity='Critical' and ACKNOWLEDGED_BY is null ;
+ 
+select 
+host_name,timestamp,message
+ from em_admin.notification_log_master
+ --where message like '%Filesystem /auto/%'
+--where message like '%Issue getting password%'
+--where message like '%FileSystem~Difference%' 
+--where ACKNOWLEDGE_FLAG='Y'  
+ where ACKNOWLEDGED_BY is null 
+ and message like '%%'
+ ; 
+
+
+select host_name,count(*) alert_count 
+from NOTIFICATION_LOG_HISTORY 
+where message like '%emcli process running%'
+and timestamp > '01-AUG-2024'
+group by host_name 
+order by count(*) desc
+;
+
+
+SELECT
+  TO_CHAR(timestamp, 'YYYY-MM') AS month,
+  COUNT(*) AS message_count
+FROM
+  NOTIFICATION_LOG_HISTORY
+WHERE
+timestamp > '01-APR-2025'
+and  message like '%Session exceeding Undo%'
+GROUP BY
+  TO_CHAR(timestamp, 'YYYY-MM')
+ORDER BY
+  month;
+
+
+
+SELECT
+  a.host_name,
+  b.db_name,
+  COUNT(*) AS message_count
+FROM
+  NOTIFICATION_LOG_HISTORY a,
+  db_compliance_ID.service_name_map b
+WHERE
+a.host_name=b.host_name and
+timestamp > '01-AUG-2025'
+and  message like '%Session exceeding Undo%'
+GROUP BY
+  a.host_name,b.db_name
+ORDER BY
+  2,count(*) desc;
+  
+  
+  
+
+select distinct host_name, db_name from db_compliance_ID.service_name_map
+where host_name in
+('sapeis-stg-01',
+….
+'dbc-dr-3016') order by db_name, host_name;  

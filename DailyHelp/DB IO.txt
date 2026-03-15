@@ -1,0 +1,73 @@
+Alert: IO_Wait_value for the Given DB Target is : PDB IO Mon: IO response is over 20 See logs in /usr/tools/oracle/Standard/script/log/ZCBPPRD1_chk_wait_io_*.
+
+This type of alert indicates to DB level IO and not the host level IO
+
+Script name: Chk_IO_Wait.ksh
+
+Location: /oracle/product/OEM/emagent/agent_inst/sysman/emd/metricExtLib/oracle_pdb/ME#24#Chk_IO_Wait_Metric_PDB/3/scripts
+
+Please check the sessions from the EM which are causing high IO and communicate accordingly. 
+We should not check from the OS level and update the alert comment.
+
+
+
+
+In the DR DB report
+Chk_IO_Usage = Shows the host level IO
+Chk_IO_Wait = Shows the DB level IO
+
+
+
+Check the current IO
+====================
+
+select trim(round(decode(wtfg, 0, to_number(null), tmfg/wtfg)/1000,2)) from
+(( select sum(case when e.total_waits_fg is not null
+then e.total_waits_fg - nvl(b.total_waits_fg,0)
+else (e.total_waits - nvl(b.total_waits,0))
+- greatest(0,(nvl(ebg.total_waits,0)
+- nvl(bbg.total_waits,0)))
+end) wtfg
+,sum(case when e.time_waited_micro_fg is not null
+then e.time_waited_micro_fg - nvl(b.time_waited_micro_fg,0)
+else (e.time_waited_micro - nvl(b.time_waited_micro,0))
+- greatest(0,(nvl(ebg.time_waited_micro,0)
+- nvl(bbg.time_waited_micro,0)))
+end) tmfg
+from dba_hist_system_event b
+, dba_hist_system_event e
+, dba_hist_bg_event_summary bbg
+, dba_hist_bg_event_summary ebg
+where b.snap_id (+) = $MIN_SNAP_H
+and e.snap_id = $MAX_SNAP_H
+and bbg.snap_id (+) = $MIN_SNAP_H
+and ebg.snap_id (+) = $MAX_SNAP_H
+and e.instance_number = $INST_NUM
+and e.dbid = b.dbid (+)
+and e.instance_number = b.instance_number (+)
+and e.event_id = b.event_id (+)
+and e.dbid = ebg.dbid (+)
+and e.instance_number = ebg.instance_number (+)
+and e.event_id = ebg.event_id (+)
+and e.dbid = bbg.dbid (+)
+and e.instance_number = bbg.instance_number (+)
+and e.event_id = bbg.event_id (+)
+and e.total_waits > nvl(b.total_waits,0)
+and e.wait_class like '%User%I/O%'));
+
+
+
+
+
+Check the snap id
+=================
+SELECT
+    SNAP_ID,
+    BEGIN_INTERVAL_TIME,
+    END_INTERVAL_TIME,
+    DBID,
+    INSTANCE_NUMBER
+FROM
+    DBA_HIST_SNAPSHOT
+ORDER BY
+    SNAP_ID;

@@ -1,0 +1,130 @@
+Monitoring Script location:
+--------------------------- 
+/oracle/product/OEM/emnagent/agent_inst/sysman/emd/metricExtLib/oracle_database/ME#24#Chk_Inst_Conn/9/scripts
+
+/oracle/product/OEM/emagent/agent_inst/sysman/emd/metricExtLib/oracle_database/ME#24#Chk_Inst_Conn/7/scripts
+
+Script name: 
+------------
+Chk_Inst_Conn.ksh
+
+How to run:
+-----------
+Chk_Inst_Conn.ksh <SID>
+
+example: Chk_Inst_Conn.ksh ZHRCORPD2
+
+Construct connection string
+--------------------------- 
+
+connect_string="(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SERVICE_NAME=$SRV_NAME)(INSTANCE_NAME=$ORA_SID)))"
+
+=> Get the protocol, port from  'srvctl config listener' output
+=> Host=mention the VIP address of the host which can be found from /etc/hosts file
+
+=> Get the service name by the below sql query:
+
+SQL>
+select 
+a.value||nvl2(b.value,'.'||b.value,null) 
+from (select value from v$parameter where name='db_unique_name') a, 
+(select value from v$parameter where name='db_domain') b;
+
+
+Check:
+------
+1. tnsping "(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SERVICE_NAME=$SRV_NAME)(INSTANCE_NAME=$ORA_SID)))"
+2. sqlplus "dbsnmp/<password>@(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SERVICE_NAME=$SRV_NAME)(INSTANCE_NAME=$ORA_SID)))"
+
+
+sqlplus "dbsnmp/W1#C0Mk_by@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=scan-prd-3028)(PORT=1541))(CONNECT_DATA=(SERVICE_NAME=ZHRCORPD.cisco.com)(INSTANCE_NAME=ZHRCORPD1)))"
+
+
+
+
+
+
+
+
+
+
+Chk_Vip_Conn()
+{
+Source_DB;
+hname=`hostname`
+LSNR_NAME=`ps -ef|grep tns|grep $DBNAME|egrep -iv '_mvdc|_dg|_asm|_em|_dr'|awk -F 'tnslsnr' '{print $2}'|awk '{print $1}'`
+HOST=`cat /etc/hosts|grep $hname|grep vip|awk '{print $NF}'`
+PROT=`srvctl config listener -l $LSNR_NAME|grep TCP|awk -F': ' '{print $2}'|awk -F':' '{print $1}'`
+PORT=`srvctl config listener -l $LSNR_NAME|grep TCP|awk -F': ' '{print $2}'|awk -F':' '{print $2}'`
+connect_string="(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SERVICE_NAME=$SRV_NAME)(INSTANCE_NAME=$ORA_SID)))"
+username=dbsnmp
+password=`/auto/hosting/bin/Oracle/pwVault/toolPwd $DBNAME,$username`
+if [[ -z "$password" ]];then
+    echo "Result-dbsnmp Password shows null for $DBNAME from password vault|2"
+    exit;
+fi
+Vip_Chk=$(sqlplus -S "$username/$password@$connect_string" <<EOF
+set echo off verify off head off feed off pages0 trimspool on;
+SELECT 'YES' FROM dual;
+EXIT;
+EOF
+)
+export Vip_Chk
+}
+
+
+
+
+
+
+
+
+Chk_Scan_Conn()
+{
+Source_GRID;
+PROT=`srvctl config scan_listener|grep TCP|awk -F': ' '{print $2}'|awk -F':' '{print $1}'`
+PORT=`srvctl config scan_listener|grep TCP|awk -F': ' '{print $2}'|awk -F':' '{print $2}'`
+HOST=`srvctl config scan|grep name| awk 'match($0, /SCAN name: ([^,]+)/, arr) {print arr[1]}'`
+connect_string="(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SERVICE_NAME=$SRV_NAME)(SID=$ORA_SID)))"
+username=dbsnmp
+password=`/auto/hosting/bin/Oracle/pwVault/toolPwd $DBNAME,$username`
+if [[ -z "$password" ]];then
+    echo "Result-dbsnmp Password shows null for $DBNAME from password vault|2"
+    exit;
+fi
+Scan_Chk=$(sqlplus -S "$username/$password@$connect_string" <<EOF
+set echo off verify off head off feed off pages0 trimspool on;
+SELECT 'YES' FROM dual;
+EXIT;
+EOF
+)
+export Scan_Chk
+}
+
+
+
+
+
+
+
+
+Chk_Lsnr_Conn()
+{
+Source_DB;
+hname=`hostname`
+LSNR_NAME=`ps -ef|grep tns|grep $DBNAME|egrep -iv '_mvdc|_dg|_asm|_em|_dr'|awk -F 'tnslsnr' '{print $2}'|awk '{print $1}'`
+HOST=`lsnrctl status $LSNR_NAME|grep Connecting | grep -ioP '(?<=HOST=)[^)]+'`
+PROT=`lsnrctl status $LSNR_NAME|grep Connecting | grep -ioP '(?<=PROTOCOL=)[^)]+'`
+PORT=`lsnrctl status $LSNR_NAME|grep Connecting | grep -ioP '(?<=PORT=)[^)]+'`
+connect_string="(DESCRIPTION=(ADDRESS=(PROTOCOL=$PROT)(HOST=$HOST)(PORT=$PORT))(CONNECT_DATA=(SID=$ORA_SID)))"
+username=dbsnmp
+password=`/auto/hosting/bin/Oracle/pwVault/toolPwd $DBNAME,$username`
+if [[ -z "$password" ]];then
+    echo "Result-dbsnmp Password shows null for $DBNAME from password vault|2"
+    exit;
+fi
+Lsnr_Chk=$(sqlplus -S "$username/$password@$connect_string" <<EOF
+set echo off verify off head off feed off pages0 trimspool on;
+SELECT 'YES' FROM dual;
+EXIT;
+

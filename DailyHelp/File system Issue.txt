@@ -1,0 +1,77 @@
+RUN LOG FILE MANAGER
+====================
+sudo -u oracle /auto/hosting/bin/Oracle/database/Logfile_Manager.ksh
+
+
+CHECK AND ZIP FILES
+===================
+FIND LARGE SIZE FILES
+----------------------
+find . -xdev -size +100000000c -exec du -sh {} \;
+
+find . -xdev -size +100000000c -exec ls -lrth {} \;
+
+
+du -hsx * | sort -rh | head -10
+
+find . -name "cdmp_*" -mmin +60 -exec du -sh {} \;
+
+find . -name "*.trc" -mtime +7 -exec ls -lrth {} \;
+find . -name "*.log" -mmin +7 -exec ls -lrth {} \;
+
+find . -name "*.tr*" -mmin +100 -exec gzip --fast {} \; &
+
+LIST
+----
+find . -name "control_*.ctl" -mtime +4 -exec ls -lrth {} \;
+find . -name "*.log" -mtime +120 -exec ls -lrth {} \;
+find . -name "*.trc" -mtime +7 -exec ls -lrth {} \;
+find . -name "*.trm" -mtime +120 -exec ls -lrth {} \;
+find . -name "*.aud" -mtime +365 -exec ls -lrth {} \;
+find . -maxdepth 1 \( -name "*.txt" -o -name "*.dbg" -o -name "*details_EM" \) -mtime +7 -exec ls -lrth {} \;
+find . -maxdepth 1 \( -name "*.trc" -o -name "*.trm" \) -mtime +30 -exec ls -lrth {} \;
+
+REMOVE
+------
+find . -name "*.gz" -mtime +1 -exec rm -rf {} \; &
+
+cd /usr/tools/oracle/Standard/script/log/
+sudo -u oracle find . -name "*.rep" -mtime +8 -exec  rm  {} \;
+sudo -u oracle find . -name "*.dbg" -mtime +8 -exec  rm  {} \;
+sudo -u oracle find . -name "*.log" -mtime +8 -exec  rm  {} \;
+sudo -u oracle find . -name "*.txt" -mtime +8 -exec  rm  {} \;
+
+
+
+
+Vinay Madhukar 23-07-2023 13:14 • for /apps
+mount check on the local path
+/apps/local/CFNPRD/inst/apps/CFNPRD_c7-a2-oa2-iprd-76/logs/ora/10.1.3/Apache
+zip the access_log files in this
+
+
+
+sudo /bin/ls -lrth /oracle/admin/GRID/oracle.ahf/data/dbc-prd1-2110/orachk/user_root/output
+
+cd /oracle/admin/GRID/oracle.ahf/data/dbc-prd1-2106/orachk/user_root/output
+find . -name "orachk_*" -mtime +7 -exec sudo /bin/ls -lrt {} \;
+find . -name "*orachk_*" -mtime +7 -exec sudo /bin/rm -rf {} \;
+
+
+*.txt
+*.dbg
+NETBIQA1_INIT_DETAILS_*
+
+find /usr/tools/oracle/Standard/script/log -name "*.txt" -mtime +730 -exec ls -lrth {} \;
+
+find /usr/tools/oracle/Standard/script/log -name "*.dbg" -mtime +730 -exec ls -lrth {} \;
+
+find /usr/tools/oracle/Standard/script/log -name "*NETBIQA1_INIT_DETAILS_*" -mtime +730 -exec ls -lrth {} \;
+
+
+WDIR=/usr/tools/oracle/Standard/script
+CONFIG_DIR=$WDIR/config
+LOG_DIR=$WDIR/log
+DATAFILE=$CONFIG_DIR/logfile_manager.cfg
+
+/usr/tools/oracle/Standard/script/config/logfile_manager.cfg

@@ -1,0 +1,89 @@
+set lines 400
+select inst_id,process,client_process,status,thread#,sequence#,block#,blocks from gv$managed_standby where PROCESS like '%MRP%'; 
+
+select arch.thread# "Thread",arch.sequence# "Last Sequence Received", appl.sequence# "Last Sequence Applied",(arch.sequence# - appl.sequence#) "Difference"
+from
+(select thread#,max(sequence#) as sequence#  from v$archived_log  where RESETLOGS_CHANGE# = (SELECT RESETLOGS_CHANGE# FROM V$DATABASE_INCARNATION  WHERE STATUS = 'CURRENT')
+and archived = 'YES' group by thread# order by thread#)arch,
+(select thread#,max(sequence#) as sequence# from v$archived_log   where RESETLOGS_CHANGE# = (SELECT RESETLOGS_CHANGE# FROM V$DATABASE_INCARNATION  WHERE STATUS = 'CURRENT')
+and applied = 'YES' group by thread# order by thread#) appl
+where arch.thread# = appl.thread#;
+
+select 'Standby is Lagging Behind '||round((sysdate-max(first_time))*24,2)||' Hours' LAG from v$log_history;
+
+
+select process,client_process,status,thread#,sequence#,block#,blocks from v$managed_standby where PROCESS like '%MRP%';
+
+
+select inst_id,process,client_process,status,thread#,sequence#,block#,blocks from gv$managed_standby where PROCESS like '%MRP%';
+
+select thread#,max(sequence#),round((sysdate-max(first_time))*24,2) "Hours Behind" from v$archived_log where Applied='YES' group by thread#;
+
+set lines 400
+col value for a20
+col INST_ID for 999999999
+select INST_ID,NAME,VALUE,TIME_COMPUTED,DATUM_TIME from gv$dataguard_stats order by INST_ID,NAME;
+
+set pages 10000
+alter session set nls_date_format = 'DD-MON-YYYY HH24:MI:SS';
+select trunc(COMPLETION_TIME,'HH') Hour,thread# , 
+round(sum(BLOCKS*BLOCK_SIZE)/1024/1024/1024) GB,
+count(*) Archives from v$archived_log
+group by trunc(COMPLETION_TIME,'HH'),thread#  
+order by 1,2
+;
+
+
+Manual Recovery
+=============== 
+
+Screen Mode
+===========
+
+tmux new -s TTMPRD_RECOVERY 
+
+Cancel the recovery   :  recover managed standby database cancel;
+Start manual recovery :  recover standby database until cancel using backup controlfile parallel 20
+
+OR
+
+SQL> recover standby database until cancel parallel 32;
+
+
+Service name recovery
+===================== 
+
+shutdown both dr instances .
+start instance 1 with no mount
+startup nomount
+rman
+CONNECT TARGET "SYSBACKUP/Yd74KtP_1_ AS SYSBACKUP"
+connect catalog RMAN_ZTXPRD/rmanZTXPRD1#@rcatprod
+RESTORE STANDBY CONTROLFILE FROM SERVICE ZTXPRD_PRIMARY;
+ALTER DATABASE MOUNT;
+exit
+rman
+CONNECT TARGET "SYSBACKUP/Yd74KtP_1_ AS SYSBACKUP"
+RECOVER DATABASE noredo;
+RECOVER DATABASE FROM SERVICE ZTXPRD_PRIMARY NOREDO SECTION SIZE 8000M; 
+
+START MRP
+=========
+alter database recover managed standby database nodelay disconnect from session; 
+
+STOP MRP
+=========
+alter database recover managed standby database cancel; 
+
+MVDC MRP START
+==============
+edit database 'DMPROD_STANDBY' SET STATE='APPLY-OFF';
+
+MVDC MRP STOP
+=============
+edit database 'ESMPRD_PRIMARY' set state='APPLY-ON' with apply instance ='ESMPRD2';
+
+
+OPEN DR
+=======
+alter database open read only;

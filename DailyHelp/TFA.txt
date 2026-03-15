@@ -1,0 +1,125 @@
+COLLECT TFA
+============
+/oracle/product/grid_home1/tfa/bin/./tfactl diagcollect -all -from "Dec/01/2022 05:30:00" -to "Dec/01/2022 06:30:00"
+
+$TFA_HOME/bin/tfactl diagcollect -all -from "Feb/11/2022 05:00:00" -to "Feb/24/2022 08:00:00"
+
+
+
+./tfactl diagcollect -all
+./tfactl diagcollect -all -since 6h
+ /opt/oracle.ahf/ahf/bin/tfactl diagcollect -all -since 3h
+
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -srdc dbrac -nososreport -from "Jan/15/2026 06:00:00" -to "Jan/15/2026 08:00:00" 
+
+$TFA_HOME/bin/tfactl diagcollect -srdc dbrac -nososreport 
+
+$TFA_HOME/bin/tfactl diagcollect -srdc dbrac -nososreport -from "Nov/17/2024 22:26:00" -to "Nov/18/2024 00:26:00" 
+
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -srdc dbrac -nososreport -from "Nov/17/2024 22:26:00" -to "Nov/18/2024 00:26:00" 
+
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -srdc dbrac -nososreport
+
+$TFA_HOME/bin/tfactl diagcollect -srdc dbrac ora600
+
+$TFA_HOME/bin/tfactl diagcollect -all -nososreport -from "Jan/15/2026 06:00:00" -to "Jan/15/2026 08:00:00"
+
+run this one
+=============
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -nososreport -noclassify -from "Nov/17/2024 22:26:00" -to "Nov/18/2024 00:26:00" 
+
+
+$TFA_HOME/bin/tfactl diagcollect -srdc dbracperf -nososreport
+
+tfactl diagcollect -srdc dbrac -nososreport -noclassify
+
+$TFA_HOME/bin/tfactl stop
+$TFA_HOME/bin/tfactl start
+$TFA_HOME/bin/tfactl diagcollect -srdc ora600
+
+$TFA_HOME/bin/tfactl print status
+
+$TFA_HOME/bin/tfactl diagcollect -srdc ora600
+$TFA_HOME/bin/tfactl diagcollect -noclassify -srdc ora600
+$TFA_HOME/bin/tfactl diagcollect -srdc ora7445
+
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -srdc dbrac ora600
+
+/opt/oracle.ahf/ahf/bin/tfactl diagcollect -srdc ora7445
+
+
+ tar -cvf tfa_all_nodes_1.tar.gz /oracle/export/CHG1789783/tfa1
+
+
+COLLECT AND UPLOAD
+==================
+tfactl diagcollect -upload mos -srdc ora00600 -id 3-32036791821
+tfactl diagcollect -upload mos -srdc ORA-07445 -id 3-32036791821
+tfactl diagcollect -upload mos -all -since 2h -id 3-32036791821
+
+
+TFACTL STATUS CHECK
+===================
+sudo /auto/hosting/bin/Oracle/database/tfa_ahf/TFA_REPORT_V1.py status
+ 
+TFACTL STOP
+============ 
+sudo /auto/hosting/bin/Oracle/database/tfa_ahf/TFA_REPORT_V1.py stop
+
+TFACTL START
+============  
+sudo /auto/hosting/bin/Oracle/database/tfa_ahf/TFA_REPORT_V1.py start
+
+UPLOAD TO SR
+============
+curl -T TFA_logs_all_nodes.tar.gz -o TFA_logs_all_nodes.tar.gz -u "avikpau@cisco.com" "https://transport.oracle.com/upload/issue/3-43126039961/"
+
+curl -T dbc-dr-vm-1011.tfa_srdc_dbrac_Wed_Feb_05_05_04_59_PST_2025.zip -o dbc-dr-vm-1011.tfa_srdc_dbrac_Wed_Feb_05_05_04_59_PST_2025.zip -u "avikpau@cisco.com" "https://transport.oracle.com/upload/issue/3-39531206181/"
+
+curl -T crs_logs_all_nodes.tar.gz -o crs_logs_all_nodes.tar.gz -u "avikpau@cisco.com" "https://transport.oracle.com/upload/issue/3-36269019111/"
+
+
+tar -cvf TFA_logs_all_nodes_15012025.tar.gz /oracle/export/4-0001689279
+
+
+
+Oracle SR for critical ORA- error
+==================================
+
+$ORACLE_HOME/OPatch/opatch lsinventory -invPtrLoc $ORACLE_HOME/oraInst.loc -detail > /tmp/<DB NAME>_OPatch.log
+
+
+Uploading files to the oracle SR
+================================
+curl -# -o output --location-trusted --location --request  PUT "https://support.oracle.com/cloud-transport/cfm/fileManagement/serviceRequests/%SRnum%/attachment/upload/%filename%?visibility=MISC&restricted=EPHI" --header "Content-Type: application/octet-stream" --header "Authorization: Bearer %token%" -T "%filename%" -w "%{http_code}"  
+
+* Replace %filename% in 2 places with the actual filename with extension, you are uploading.
+* Please ensure the filename doesn't have any spaces.
+* Replace %SRnum% with the actual SR number you are uploading the file to.
+* Replace %token% with the file upload token copied from the customer portal preferences page (60 minutes validity).
+* To obtain your token, click on Account in top right corner of the portal, and select "Preferences". In the Personal Information section, click on "Generate File Upload Token" and copy the token.
+
+For more information visit
+https://support.oracle.com/support/?anchorId=%23UFSR2GB&kmContentId=10024001&page=sptemplate&sptemplate=km-article#UFSR2GB
+
+
+
+curl -# -o output \
+--location-trusted \
+--location \
+--request  PUT "https://support.oracle.com/cloud-transport/cfm/fileManagement/serviceRequests/%SRnum%/attachment/upload/%filename%?visibility=MISC&restricted=EPHI" \
+--header "Content-Type: application/octet-stream" --header "Authorization: Bearer %token%" \n 
+-T "%filename%" -w "%{http_code}"
+
+
+
+curl -# -o output \
+--location-trusted \
+--location \
+--request  PUT "https://support.oracle.com/cloud-transport/cfm/fileManagement/serviceRequests/4-0001919207/attachment/upload/dbc-prd-2085.tfa_srdc_ora600_Thu_Jan_29_06_12_58_PST_2026.zip?visibility=MISC&restricted=EPHI" \
+--header "Content-Type: application/octet-stream" --header "Authorization: Bearer eyJ4NXQjUzI1NiI6IkZ4R1dHQzlxeXY5d0RTbnZSX19GY3RsVWdSTnF4Q29BamxXZDExWmdGZE0iLCJ4NXQiOiJibE9jZ0Zyd0dVbm1GSWxuNWEycFQ3QW9hZU0iLCJraWQiOiJTSUdOSU5HX0tFWSIsImFsZyI6IlJTMjU2In0.eyJjbGllbnRfb2NpZCI6Im9jaWQxLmRvbWFpbmFwcC5vYzEucGh4LmFtYWFhYWFhYXF0cDViYWE1NTVjZXFrZzNmNGQ3ZXJ5aHZud2FoNnFpeGVsY3pocGZ2ZGRrcTRtZXByYSIsInVzZXJfdHoiOiJBbWVyaWNhL0NoaWNhZ28iLCJzdWIiOiJhdmlrcGF1QGNpc2NvLmNvbSIsInVzZXJfbG9jYWxlIjoiZW4iLCJzaWRsZSI6NDgwLCJ1c2VyLnRlbmFudC5uYW1lIjoiaWRjcy1hMGM4OTM2ZmI4MmU0ZmU3ODE5MzYyM2I0NGFmMWI5NyIsImlzcyI6Imh0dHBzOi8vaWRlbnRpdHkub3JhY2xlY2xvdWQuY29tLyIsImRvbWFpbl9ob21lIjoidXMtcGhvZW5peC0xIiwiY2Ffb2NpZCI6Im9jaWQxLnRlbmFuY3kub2MxLi5hYWFhYWFhYWRwcTN2YXd4dWd1NXpxYXRhYnd1ZzYyNDcyemJneWZmZHFjdmdqNWJ1YnV3YXU1aXdsb3EiLCJ1c2VyX3RlbmFudG5hbWUiOiJpZGNzLWEwYzg5MzZmYjgyZTRmZTc4MTkzNjIzYjQ0YWYxYjk3IiwiY2xpZW50X2lkIjoiZTY3MDQ4ZjRkM2Y0NDU4ZTgzZjAxODdkM2IwMzYzMmYiLCJkb21haW5faWQiOiJvY2lkMS5kb21haW4ub2MxLi5hYWFhYWFhYWFvYTZzeDZoZWx5amp4dWpuaXh6cmIyNnJoaHFhdGU1d3VmdWxoeWs3enNwdzdyNmtnZ2EiLCJzdWJfdHlwZSI6InVzZXIiLCJzY29wZSI6ImNmbSIsImNsaWVudF90ZW5hbnRuYW1lIjoiaWRjcy1hMGM4OTM2ZmI4MmU0ZmU3ODE5MzYyM2I0NGFmMWI5NyIsInJlZ2lvbl9uYW1lIjoidXMtcGhvZW5peC1pZGNzLTMiLCJ1c2VyX2xhbmciOiJlbiIsImV4cCI6MTc2OTcwMDQ1MiwiaWF0IjoxNzY5Njk2ODUyLCJjbGllbnRfZ3VpZCI6ImQxMzc0MTFkNWZjMDQ1NDZiN2E2NDVmODg1NTI5MTY2IiwiY2xpZW50X25hbWUiOiJjdXN0b21lcl9wb3J0YWwtMDEuMTcwLjQxMCBwcm9maWxlIHByb2RfY29uZmlndXJhdGlvbiB3ZWIgQzIxNTNENUM4NURDNDJGMThDNzlBN0NERTJFNDQzRTkgMTc2ODYyMzQ3MDgyMyIsInRlbmFudCI6ImlkY3MtYTBjODkzNmZiODJlNGZlNzgxOTM2MjNiNDRhZjFiOTciLCJqdGkiOiJhYmIxY2VhMmI2OTQ0MDUxYWJjZTQ1OThiNzg0NzRiZCIsImd0cCI6Imp3dCIsInVzZXJfZGlzcGxheW5hbWUiOiJBdmlrIFBhdWwiLCJvcGMiOmZhbHNlLCJzdWJfbWFwcGluZ2F0dHIiOiJ1c2VyTmFtZSIsInByaW1UZW5hbnQiOmZhbHNlLCJ0b2tfdHlwZSI6IkFUIiwiY2FfZ3VpZCI6ImNhY2N0LWU2MDIyNGQzNWIzNzQ3NzU4ZmUwOWJhOGQzYjE4YTI3IiwiYXVkIjoiaHR0cHM6Ly9jbW9zLm9yYWNsZS5jb20vIiwiY2FfbmFtZSI6InN1cHBvcnQzIiwidXNlcl9pZCI6IjM0NmRmNzc3NjIwNjQzM2Y4MzRiZTRjZmQ5MWI0YmYxIiwiZG9tYWluIjoiZXRtaSIsInRlbmFudF9pc3MiOiJodHRwczovL2lkY3MtYTBjODkzNmZiODJlNGZlNzgxOTM2MjNiNDRhZjFiOTcuaWRlbnRpdHkub3JhY2xlY2xvdWQuY29tOjQ0MyIsInJlc291cmNlX2FwcF9pZCI6IjhjZTVmN2NlNmFkMzQ0NDc5ZGM3MDUxYzQ4YTE0NGY0In0.ghleu00XOHvA1Z8DzzeWdOzEvjwoce_AxyXDxGQu9hTDqnbHyIJRGuBfs-X3YD28KZ7gSVdi288I1-lIUWJ5XT64GONKJTM1hYpmJpWdHRiBFkon2PjXro0lgAA4g0W__5L5kE_-EEl7gWlRxGwW-MJmN6r2tAgJARBnlT3RP0BNVXzzuAiZduOMleCelVc6VAvbW7a3_E7FGQjwKu97pjzYjBDvurgsc1PY4Z1CgEi3v4GSBoxnJ60isOZ35WEoEXu4iDmn6KDMoD_2DXd0BZU8sRfnuKI4-VfFenCBp2OQV6TcwzbFqhW9sJo7Jl9qLSu6EwUCMfyXs1uof0nHmQ" \
+-T "dbc-prd-2085.tfa_srdc_ora600_Thu_Jan_29_06_12_58_PST_2026.zip" -w "%{http_code}"
+
+
+4-0001733428
+

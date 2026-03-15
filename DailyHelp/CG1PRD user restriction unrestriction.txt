@@ -1,0 +1,25 @@
+CHECK USER RESTRICTION
+======================
+
+login to the cg1 db host
+
+CG1PRD Primary node 1 (Currently : lnxdb-prd2-351)
+
+Location : /usr/tools/oracle/Standard/script/log
+
+Restriction log : ls -lrth  IDCS_CG1PRD_restrict* | tail
+
+Unrestriction log : ls -lrth  IDCS_CG1PRD_unrestrict* | tail
+
+
+Scripts
+========
+Path : /usr/tools/oracle/Standard/User_Restriction/idcs-restrict/scripts
+
+/idcs_restriction.py -db CG1PRD -cmd unrestrict -d
+./idcs_restriction.py -db CG1PRD -cmd status
+
+Mode:
+status
+restrict
+unrestrict

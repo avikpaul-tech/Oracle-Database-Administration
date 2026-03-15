@@ -1,0 +1,481 @@
+Useful Queries for Checking Concurrent Requests and Programs
+Hi DBAs,
+As an Apps DBA we have to monitor the Concurrent jobs status and details frequently,This can be done with the help of the below queries.
+
+-- Concurrent Program Queries for Apps DBA:
+
+
+-- Query 1:For checking the locks in concurrent jobs
+
+SELECT 
+DECODE(request,0,'Holder: ','Waiter: ')||sid sess,
+inst_id,
+id1, 
+id2, 
+lmode, request, type 
+FROM 
+gV$LOCK
+WHERE 
+(id1, id2, type) IN (SELECT id1, id2, type FROM gV$LOCK WHERE request>0) 
+ORDER BY 
+id1,request;
+
+
+-- Query 2:For checking the concurrent programs running currently with Details of Processed time-- and Start Date
+
+SELECT 
+DISTINCT c.USER_CONCURRENT_PROGRAM_NAME,
+round(((sysdate-a.actual_start_date)*24*60*60/60),2) AS Process_time,
+a.request_id,
+a.parent_request_id,
+a.request_date,
+a.actual_start_date,
+a.actual_completion_date,
+(a.actual_completion_date-a.request_date)*24*60*60 AS end_to_end,
+(a.actual_start_date-a.request_date)*24*60*60 AS lag_time,
+d.user_name, 
+a.phase_code,
+a.status_code,
+a.argument_text,
+a.priority
+FROM   
+apps.fnd_concurrent_requests a,
+apps.fnd_concurrent_programs b,
+apps.FND_CONCURRENT_PROGRAMS_TL c,
+apps.fnd_user d
+WHERE  
+a.concurrent_program_id=b.concurrent_program_id 
+AND b.concurrent_program_id=c.concurrent_program_id 
+AND a.requested_by=d.user_id 
+AND status_code='R' 
+order by 
+Process_time desc;
+   
+
+-- Query 3:For checking last run of a Concurrent Program along with Processed time
+-- Useful to find the Details of Concurrent programs which run daily and comparison purpose
+
+SELECT DISTINCT c.USER_CONCURRENT_PROGRAM_NAME,
+            round(((a.actual_completion_date-a.actual_start_date)*24*60*60/60),2) AS Process_time,
+            a.request_id,a.parent_request_id,To_Char(a.request_date,'DD-MON-YY HH24:MI:SS'),To_Char(a.actual_start_date,'DD-MON-YY HH24:MI:SS'),
+  To_Char(a.actual_completion_date,'DD-MON-YY HH24:MI:SS'), (a.actual_completion_date-a.request_date)*24*60*60 AS end_to_end,
+            (a.actual_start_date-a.request_date)*24*60*60 AS lag_time,
+            d.user_name, a.phase_code,a.status_code,a.argument_text,a.priority
+FROM   apps.fnd_concurrent_requests a,
+            apps.fnd_concurrent_programs b ,
+            apps.FND_CONCURRENT_PROGRAMS_TL c,
+            apps.fnd_user d
+WHERE       a.concurrent_program_id= b.concurrent_program_id AND
+            b.concurrent_program_id=c.concurrent_program_id AND
+            a.requested_by =d.user_id AND
+--          trunc(a.actual_completion_date) = '24-AUG-2005'
+c.USER_CONCURRENT_PROGRAM_NAME='Incentive Compensation Analytics - ODI' --  and argument_text like  '%, , , , ,%';
+--          and status_code!='C'
+
+-- Query 4:For Checking the last run of concurrent Program.
+- Use below query to check all the concurrent request running which may refer given package
+-- This is very useful check before compiling any package on given instance.
+-- The query can be modified as per requirement.
+-- Remove FND_CONCURRENT_REQUESTS table and joins to check all program dependent on given package.
+
+SELECT
+ FCR.REQUEST_ID
+,FCPV.USER_CONCURRENT_PROGRAM_NAME
+,FCPV.CONCURRENT_PROGRAM_NAME
+,FCPV.CONCURRENT_PROGRAM_ID
+,FCR.STATUS_CODE
+,FCR.PHASE_CODE
+FROM FND_CONCURRENT_PROGRAMS_VL FCPV
+,FND_EXECUTABLES FE
+,SYS.DBA_DEPENDENCIES DD
+,FND_CONCURRENT_REQUESTS FCR
+WHERE FCPV.EXECUTABLE_ID = FE.EXECUTABLE_ID
+AND FE.EXECUTION_METHOD_CODE = 'I'
+AND SUBSTR(FE.EXECUTION_FILE_NAME,1,INSTR(FE.EXECUTION_FILE_NAME, '.', 1, 1) - 1) = UPPER(DD.NAME)
+AND DD.REFERENCED_TYPE IN ('VIEW', 'TABLE', 'TRIGGER', 'PACKAGE') -- add as required
+--AND referenced_owner = 'XXCUS'
+AND DD.REFERENCED_NAME = UPPER('&Package_name')
+AND FCR.CONCURRENT_PROGRAM_ID = FCPV.CONCURRENT_PROGRAM_ID
+AND fcr.phase_code NOT IN ( 'C','P');
+
+-- Query 5:The following query will display the time taken to execute the concurrent Programs
+--for a particular user with the latest concurrent programs sorted in least time taken
+-- to complete the request.
+
+ SELECT
+      f.request_id ,
+      pt.user_concurrent_program_name user_conc_program_name,
+      f.actual_start_date start_on,
+      f.actual_completion_date end_on,
+      floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)
+        || ' HOURS ' ||
+        floor((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600)/60)
+        || ' MINUTES ' ||
+        round((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600 -
+        (floor((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600)/60)*60) ))
+        || ' SECS ' time_difference,
+      p.concurrent_program_name concurrent_program_name,
+      decode(f.phase_code,'R','Running','C','Complete',f.phase_code) Phase,
+      f.status_code
+from  apps.fnd_concurrent_programs p,
+      apps.fnd_concurrent_programs_tl pt,
+      apps.fnd_concurrent_requests f
+where f.concurrent_program_id = p.concurrent_program_id
+      and f.program_application_id = p.application_id
+      and f.concurrent_program_id = pt.concurrent_program_id
+      and f.program_application_id = pt.application_id
+      AND pt.language = USERENV('Lang')
+      and f.actual_start_date is not null
+order by
+      f.actual_start_date desc;
+
+--Query 6: By using the below Query we can get sid,serial#,spid of the concurrent Request..
+   
+SELECT a.request_id, d.sid, d.serial# , c.SPID
+FROM apps.fnd_concurrent_requests a,
+apps.fnd_concurrent_processes b,
+v$process c,
+gv$session d
+WHERE a.controlling_manager = b.concurrent_process_id
+AND c.pid = b.oracle_process_id
+AND b.session_id=d.audsid
+AND a.request_id = &Request_ID
+AND a.phase_code = 'R';
+
+--Query 7: By using below Concurrent Manager and Program rules...
+--Gives Detail of the Concurrent_queue_name and User_concurrent_program_name
+
+SELECT b.concurrent_queue_name, c.user_concurrent_program_name
+FROM FND_CONCURRENT_QUEUE_CONTENT a, fnd_concurrent_queues b, fnd_concurrent_programs_vl c
+WHERE a.queue_application_id = 283
+and a.concurrent_queue_id = b.concurrent_queue_id
+and a.type_id = c.concurrent_program_id
+order by decode(INCLUDE_FLAG, 'I', 1, 2), type_code;
+   
+--Query 8: Gives Details of Running Concurrent jobs
+
+SELECT DISTINCT c.USER_CONCURRENT_PROGRAM_NAME,
+      round(((sysdate-a.actual_start_date)*24*60*60/60),2) AS Process_time,
+    a.request_id,a.parent_request_id,a.request_date,a.actual_start_date,a.actual_completion_date,
+      (a.actual_completion_date-a.request_date)*24*60*60 AS end_to_end,
+      (a.actual_start_date-a.request_date)*24*60*60 AS lag_time,
+      d.user_name, a.phase_code,a.status_code,a.argument_text,a.priority
+FROM     apps.fnd_concurrent_requests a,
+    apps.fnd_concurrent_programs b ,
+    apps.FND_CONCURRENT_PROGRAMS_TL c,
+    apps.fnd_user d
+WHERE   a.concurrent_program_id=b.concurrent_program_id AND
+    b.concurrent_program_id=c.concurrent_program_id AND
+    a.requested_by=d.user_id AND
+    status_code='R' order by Process_time desc;
+   
+ -- Query 9: Gives detail of Concurrent job completed and pending
+
+SELECT
+ FCR.REQUEST_ID
+,FCPV.USER_CONCURRENT_PROGRAM_NAME
+,FCPV.CONCURRENT_PROGRAM_NAME
+,FCPV.CONCURRENT_PROGRAM_ID
+,FCR.STATUS_CODE
+,FCR.PHASE_CODE
+FROM FND_CONCURRENT_PROGRAMS_VL FCPV
+,FND_EXECUTABLES FE
+,SYS.DBA_DEPENDENCIES DD
+,FND_CONCURRENT_REQUESTS FCR
+WHERE FCPV.EXECUTABLE_ID = FE.EXECUTABLE_ID
+AND FE.EXECUTION_METHOD_CODE = 'I'
+AND SUBSTR(FE.EXECUTION_FILE_NAME,1,INSTR(FE.EXECUTION_FILE_NAME, '.', 1, 1) - 1) = UPPER(DD.NAME)
+AND DD.REFERENCED_TYPE IN ('VIEW', 'TABLE', 'TRIGGER', 'PACKAGE') -- add as required
+--AND referenced_owner = 'XXCUS'
+AND DD.REFERENCED_NAME = UPPER('&Package_name')
+AND FCR.CONCURRENT_PROGRAM_ID = FCPV.CONCURRENT_PROGRAM_ID
+AND fcr.phase_code NOT IN ( 'C','P');
+
+-- Query 10:Gives Detail of Running and Completed Concurrent jobs with Start date and end date
+-- Latest one at the top
+
+select
+      f.request_id ,
+      pt.user_concurrent_program_name user_conc_program_name,
+      f.actual_start_date start_on,
+      f.actual_completion_date end_on,
+      floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)
+        || ' HOURS ' ||
+        floor((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600)/60)
+        || ' MINUTES ' ||
+        round((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600 -
+        (floor((((f.actual_completion_date-f.actual_start_date)
+        *24*60*60) -
+        floor(((f.actual_completion_date-f.actual_start_date)
+        *24*60*60)/3600)*3600)/60)*60) ))
+        || ' SECS ' time_difference,
+      p.concurrent_program_name concurrent_program_name,
+      decode(f.phase_code,'R','Running','C','Complete',f.phase_code) Phase,
+      f.status_code
+from  apps.fnd_concurrent_programs p,
+      apps.fnd_concurrent_programs_tl pt,
+      apps.fnd_concurrent_requests f
+where f.concurrent_program_id = p.concurrent_program_id
+      and f.program_application_id = p.application_id
+      and f.concurrent_program_id = pt.concurrent_program_id
+      and f.program_application_id = pt.application_id
+      AND pt.language = USERENV('Lang')
+      and f.actual_start_date is not null
+order by
+      f.actual_start_date desc;
+
+--- Query 11 wait events details related with Concurrent programs
+
+SELECT s.saddr, s.SID, s.serial#, s.audsid, s.paddr, s.user#, s.username,
+s.command, s.ownerid, s.taddr, s.lockwait, s.status, s.server,
+s.schema#, s.schemaname, s.osuser, s.process, s.machine, s.terminal,
+UPPER (s.program) program, s.TYPE, s.sql_address, s.sql_hash_value,
+s.sql_id, s.sql_child_number, s.sql_exec_start, s.sql_exec_id,
+s.prev_sql_addr, s.prev_hash_value, s.prev_sql_id,
+s.prev_child_number, s.prev_exec_start, s.prev_exec_id,
+s.plsql_entry_object_id, s.plsql_entry_subprogram_id,
+s.plsql_object_id, s.plsql_subprogram_id, s.module, s.module_hash,
+s.action, s.action_hash, s.client_info, s.fixed_table_sequence,
+s.row_wait_obj#, s.row_wait_file#, s.row_wait_block#,
+s.row_wait_row#, s.logon_time, s.last_call_et, s.pdml_enabled,
+s.failover_type, s.failover_method, s.failed_over,
+s.resource_consumer_group, s.pdml_status, s.pddl_status, s.pq_status,
+s.current_queue_duration, s.client_identifier,
+s.blocking_session_status, s.blocking_instance, s.blocking_session,
+s.seq#, s.event#, s.event, s.p1text, s.p1, s.p1raw, s.p2text, s.p2,
+s.p2raw, s.p3text, s.p3, s.p3raw, s.wait_class_id, s.wait_class#,
+s.wait_class, s.wait_time, s.seconds_in_wait, s.state,
+s.wait_time_micro, s.time_remaining_micro,
+s.time_since_last_wait_micro, s.service_name, s.sql_trace,
+s.sql_trace_waits, s.sql_trace_binds, s.sql_trace_plan_stats,
+s.session_edition_id, s.creator_addr, s.creator_serial#
+FROM v$session s
+WHERE ( (s.username IS NOT NULL)
+AND (NVL (s.osuser, 'x') <> 'SYSTEM')
+AND (s.TYPE <> 'BACKGROUND') AND STATUS='ACTIVE'
+)
+ORDER BY "PROGRAM";
+
+-- Query 12 To find the pid of the Concurrent job and kill it.
+
+Select a.inst_id, sid, b.spid
+from gv$session a, gv$process b,apps.fnd_concurrent_requests c where a.paddr = b.addr and request_ID ='31689665' 
+AND a.inst_id = b.inst_id and c.os_process_id = a.process;
+
+-- Query 13:To find the Database SID of the Concurrent job
+-- We need our concurrent request ID as an input.
+-- c.SPID= is the operating system process id
+-- d.sid= is the Oracle process id
+
+SQL> column process heading "FNDLIBR PID"
+SELECT a.request_id, d.sid, d.serial# ,d.osuser,d.process , c.SPID
+FROM apps.fnd_concurrent_requests a,
+apps.fnd_concurrent_processes b,
+v$process c,
+v$session d
+WHERE a.controlling_manager = b.concurrent_process_id
+AND c.pid = b.oracle_process_id
+AND b.session_id=d.audsid
+AND a.request_id = &Request_ID
+AND a.phase_code = 'R';
+
+
+-- Query 14:To find the currently running SQL after finding SID from Query 12
+
+SELECT SQL_TEXT FROM V$SQLAREA WHERE (ADDRESS, HASH_VALUE) IN
+(SELECT SQL_ADDRESS, SQL_HASH_VALUE FROM V$SESSION WHERE SID=11710);
+
+-- Query 15:To find what exactly the program,module and the SQL it is executing
+--P2 column should change that means Concurrent program is changing blocks and moving
+
+select sid,serial#,p2,program,module from gv$session where sid=11710;
+
+-- Query 16:To find any blocking is there in RAC or non-RAC Database
+
+select process,sid,blocking_session,BLOCKING_INSTANCE from gv$session
+where blocking_session is not null;
+
+-- Query17:To check the SID and concurrent program details, where 5991=SID
+
+select sid,serial#,program,module,p2 from gv$session where SID=5991;
+
+-- Query 18: To check time remaining in minutes and elapsed  in minutes for long running job 
+
+Select round(sofar*100/totalwork,2)"finished(%)",
+Sid,
+Serial#,
+Opname,
+Target,
+Sofar,
+Totalwork,
+Units,
+(Time_Remaining/60) Time_Rem_Mins,
+(Elapsed_Seconds/60) Elapsed_Time_Mins
+From gV$session_Longops
+where TIME_REMAINING>0;
+
+--Query 19:To get the location of the trace file for Concurrent request id,eg:The Request ID --(205979614)  
+SELECT 'Request id: '||request_id ,
+'Trace id: '||oracle_Process_id,
+'Trace Flag: '||req.enable_trace,
+'Trace Name:
+'||dest.value||'/'||lower(dbnm.value)||'_ora_'||oracle_process_id||'.trc',
+'Prog. Name: '||prog.user_concurrent_program_name,
+'File Name: '||execname.execution_file_name|| execname.subroutine_name ,
+'Status : '||decode(phase_code,'R','Running')
+||'-'||decode(status_code,'R','Normal'),
+'SID Serial: '||ses.sid||','|| ses.serial#,
+'Module : '||ses.module
+from fnd_concurrent_requests req, v$session ses, v$process proc,
+v$parameter dest, v$parameter dbnm, fnd_concurrent_programs_vl prog,
+fnd_executables execname
+where req.request_id = &request
+and req.oracle_process_id=proc.spid(+)
+and proc.addr = ses.paddr(+)
+and dest.name='user_dump_dest'
+and dbnm.name='db_name'
+and req.concurrent_program_id = prog.concurrent_program_id
+and req.program_application_id = prog.application_id
+--- and prog.application_id = execname.application_id
+and prog.executable_application_id = execname.application_id
+and prog.executable_id=execname.executable_id;
+
+Note:We can use the above query to diagnose the Concurrent job failure by enabling trace on that job first and than running that concurrent job again.
+
+--Query 20:To list the concurrent programs that run today,Giving details about status and logs
+
+SELECT DISTINCT fcp.user_concurrent_program_name,
+                fcp.concurrent_program_name,
+                fcr.request_id,
+                fcr.request_date,
+                flv.meaning status,
+                fcr.status_code,
+                fcr.completion_text,
+                fcr.logfile_name,
+                fcr.outfile_name,
+                fcr.argument_text
+  FROM apps.fnd_concurrent_programs_vl fcp,
+       apps.fnd_concurrent_requests    fcr,
+       apps.fnd_lookup_values          flv
+ WHERE fcr.concurrent_program_id = fcp.concurrent_program_id
+   AND trunc(fcr.last_update_date) = trunc(SYSDATE)
+   AND flv.lookup_code = fcr.status_code
+   AND flv.lookup_type = 'CP_STATUS_CODE'
+   AND flv.language = 'US'
+ ORDER BY fcr.request_date,
+          fcr.request_id DESC;
+
+
+=======
+
+
+SQL> select REQUEST_ID,phase_code,status_code,ORACLE_SESSION_ID from apps.fnd_concurrent_requests where request_id=100392843;
+
+REQUEST_ID P S ORACLE_SESSION_ID
+---------- - - -----------------
+ 100392843 R R          11643001
+
+SQL> select sid,serial#,action,status from v$session where audsid=11643001;
+
+       SID    SERIAL# ACTION                           STATUS
+---------- ---------- --------------------------------          --------
+       716      21679 Concurrent Request               ACTIVE
+
+-------------------------------------------------------------
+How to check Pending Concurrent Requests
+------------------------------------------------------------
+set pagesize 2000
+set linesize 512
+column QUEUE_DESCRIPTION format a45
+column "CONCURRENT Manager"  format a45 HEADING "Concurrent|Manager"
+column "Queue ID"  format 999999999 HEADING "Concurrent|Queue ID"
+column "Apps ID"  format 999999 HEADING "Apps|ID"
+column NODE format a15
+column Phase format a10
+column count(1)  format 9999999 HEADING "Requests|Count()"
+SELECT a.CONCURRENT_QUEUE_ID "Queue ID",
+           a.QUEUE_APPLICATION_ID "Apps ID",
+           b.user_CONCURRENT_QUEUE_NAME "Concurrent Manager",
+           b.TARGET_NODE "NODE",
+    decode(a.PHASE_CODE, 'P','PENDING',
+                        'R','Running'
+          ) Phase,b.Running_Processes Running,b.Max_Processes Max_processes
+    ,count(1)
+     FROM apps.FND_CONCURRENT_WORKER_REQUESTS a, apps.fnd_concurrent_queues_vl b
+   WHERE (a.Phase_Code = 'P' or a.Phase_Code = 'R')
+   and a.hold_flag != 'Y'
+    and a.Requested_Start_Date <= SYSDATE
+    AND ('' IS NULL OR ('' = 'B' AND a.PHASE_CODE = 'R' AND a.STATUS_CODE IN ('I', 'Q')))
+   and '1' in (0,1,4)
+   And a.concurrent_queue_id=b.concurrent_queue_id
+    group by a.CONCURRENT_QUEUE_ID,
+            a.QUEUE_APPLICATION_ID,
+            b.user_CONCURRENT_QUEUE_NAME,
+             b.TARGET_NODE,
+              a.PHASE_CODE,b.Running_Processes,b.Max_Processes
+   order by 1;
+
+
+
+--to check child program status
+select /*+ ORDERED USE_NL(x fcr fcp fcptl)*/
+fcr.request_id "Request ID",
+fcr.requested_by "User",
+(select logfile_node_name from apps.fnd_concurrent_requests where request_id = fcr.request_id)logfile_node_name,
+(select execution_file_name from apps.fnd_executables where executable_id = fcp.executable_id)execution_file_name,
+(select concurrent_program_name from apps.fnd_concurrent_programs where concurrent_program_id = fcp.concurrent_program_id)concurrent_program_name,
+(select b.USER_CONCURRENT_QUEUE_NAME
+from 
+apps.fnd_concurrent_processes a,
+apps.fnd_concurrent_queues_vl b, 
+apps.fnd_concurrent_requests c
+where a.CONCURRENT_QUEUE_ID = b.CONCURRENT_QUEUE_ID
+and a.CONCURRENT_PROCESS_ID = c.controlling_manager
+and c.request_id = fcr.request_id) as USER_CONCURRENT_QUEUE_NAME,
+substr(DECODE (FCR.DESCRIPTION, NULL,
+FCPTL.USER_CONCURRENT_PROGRAM_NAME,
+FCR.DESCRIPTION||' ('||FCPTL.USER_CONCURRENT_PROGRAM_NAME||')'),1,80)"Program Name",
+round((fcr.actual_completion_date - fcr.actual_start_date)*1440,2) "Elapsed Time",
+oracle_process_id "Trace File ID" ,
+fcr.phase_code "Phase",
+fcr.status_code "Status",
+to_char(fcr.request_date,'DD-MON-YYYY HH24:MI:SS') "Submitted",
+round((fcr.actual_start_date - fcr.request_date)*1440,2) "Delay",
+to_char(fcr.actual_start_date,'DD-MON-YYYY HH24:MI:SS') "Start Time",
+to_char(fcr.actual_completion_date, 'DD-MON-YYYY HH24:MI:SS') "End Time",
+fcr.argument_text "Parameters"
+from (select /*+ index (fcr1 FND_CONCURRENT_REQUESTS_N3) */
+fcr1.request_id
+from apps.fnd_concurrent_requests fcr1
+where 1=1
+start with fcr1.request_id = --655118081
+1030647067 --parent pgm request id
+connect by prior fcr1.request_id = fcr1.parent_request_id) x,
+apps.fnd_concurrent_requests fcr,
+apps.fnd_concurrent_programs fcp,
+apps.fnd_concurrent_programs_tl fcptl  --1030577724
+where 
+fcr.request_id = x.request_id
+and fcr.concurrent_program_id = fcp.concurrent_program_id
+and fcr.program_application_id = fcp.application_id
+and fcp.application_id = fcptl.application_id
+and fcp.concurrent_program_id = fcptl.concurrent_program_id
+and fcptl.language = 'US'
+order by 1;

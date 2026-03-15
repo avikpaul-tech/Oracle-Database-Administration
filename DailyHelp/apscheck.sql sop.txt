@@ -1,0 +1,51 @@
+Moved files apscheck_parser.pl and apscheck.sql via WinSCP to a tmp directory and provided full permissions
+
+[nikpraka@c7-a1-oa2-iprd-15 nikpraka]$ pwd
+/tmp/nikpraka
+[nikpraka@c7-a1-oa2-iprd-15 nikpraka]$ ls -lrth
+total 188K
+-rwxrwxrwx. 1 nikpraka cisco 136K Jul 14 21:19 apscheck.sql
+-rwxrwxrwx. 1 nikpraka cisco  51K Jul 14 21:19 apscheck_parser.pl
+
+
+logged in as oauser and copied the file to home directory
+
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ pwd
+/apps/ebscg1
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ cp /tmp/nikpraka/apscheck_parser.pl .
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ cp /tmp/nikpraka/apscheck.sql .
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ ls -lrth apscheck*
+-rwxr-xr-x. 1 oacg1prd dba  51K Jul 14 23:30 apscheck_parser.pl
+-rwxr-xr-x. 1 oacg1prd dba 136K Jul 14 23:30 apscheck.sql
+
+connected as apps user and ran .sql script
+
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ sqlplus apps/xxxxxx
+
+SQL*Plus: Release 10.1.0.5.0 - Production on Mon Jul 14 23:34:28 2025
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+
+SQL> @apscheck.sql
+
+  adding: apscheck.txt (deflated 91%)
+  adding: apscheck_analyzed_summary.txt (deflated 84%)
+
+SQL> exit
+
+as script came out output file was generated in same location 
+
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+[oacg1prd@c7-a1-oa2-iprd-15 ~]$ ls -lrth aps*
+-rwxr-xr-x. 1 oacg1prd dba  51K Jul 14 23:30 apscheck_parser.pl
+-rwxr-xr-x. 1 oacg1prd dba 136K Jul 14 23:30 apscheck.sql
+-rw-r--r--. 1 oacg1prd dba 2.4M Jul 14 23:35 apscheck.txt
+-rw-r--r--. 1 oacg1prd dba  30K Jul 14 23:35 apscheck_analyzed_summary.txt
+-rw-r--r--. 1 oacg1prd dba 215K Jul 14 23:35 apscheck_output-summary_ZCG1PRD2_14-JUL-2025.zip
+
+
+apscheck_output-summary_ZCG1PRD2_14-JUL-2025.zip- file was shared with user

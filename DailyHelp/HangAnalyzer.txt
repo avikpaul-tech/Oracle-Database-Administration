@@ -1,0 +1,35 @@
+collect Hang Analyze during the Issue.
+
+sqlplus '/ as sysdba'
+SQL> oradebug setmypid
+SQL> oradebug unlimit
+SQL> oradebug tracefile_name
+SQL> oradebug -g all hanganalyze 3
+-- wait 2 Mins
+SQL> oradebug -g all hanganalyze 3
+-- wait 2 Mins
+SQL> oradebug -g all hanganalyze 3
+SQL> oradebug tracefile_name <<<<<<<==== Upload this trace file
+SQL> EXIT
+
+============================================
+SQL> oradebug setmypid
+Statement processed.
+SQL> oradebug unlimit
+Statement processed.
+SQL> oradebug -g all hanganalyze 3
+Cycle 1: (9/4071)--(9/2046)--(9/1141)
+Hang Analysis in /oracle/admin/ZCSFPRD/diag/rdbms/zcsfprd_standby/ZCSFPRD7/trace/ZCSFPRD7_diag_2711574.trc
+SQL> oradebug -g all dump systemstate 258
+Statement processed.
+SQL> oradebug -g all hanganalyze 3
+Hang Analysis in /oracle/admin/ZCSFPRD/diag/rdbms/zcsfprd_standby/ZCSFPRD7/trace/ZCSFPRD7_diag_2711574.trc
+SQL> oradebug -g all dump systemstate 258
+Statement processed.
+SQL> oradebug -g all hanganalyze 3
+Hang Analysis in /oracle/admin/ZCSFPRD/diag/rdbms/zcsfprd_standby/ZCSFPRD7/trace/ZCSFPRD7_diag_2711574.trc
+SQL> oradebug -g all dump systemstate 258
+Statement processed.
+SQL> oradebug tracefile_name
+/oracle/admin/ZCSFPRD/diag/rdbms/zcsfprd_standby/ZCSFPRD7/trace/ZCSFPRD7_ora_2622028.trc
+SQL>

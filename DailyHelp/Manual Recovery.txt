@@ -1,0 +1,61 @@
+1.Start BO on ALL node
+
+/oracle/product/OEM/emagent/agent_inst/bin/emctl start blackout "dr_recovery" -nodeLevel -d 12:00
+
+2.Check instance status
+
+set lines 200 pages 200
+COL HOST_NAME FOR A30
+COL FORCE_LOGGING FOR A15
+COL DB_UNIQUE_NAME FOR A20
+col name for a20
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD.MM.YYYY HH24:MI:SS';
+SELECT INST_ID,INSTANCE_NAME,HOST_NAME,STATUS,LOGINS,STARTUP_TIME,DATABASE_STATUS FROM GV$INSTANCE ORDER BY INST_ID;
+SELECT INST_ID,NAME,OPEN_MODE,DATABASE_ROLE,LOG_MODE,FLASHBACK_ON,DB_UNIQUE_NAME,FORCE_LOGGING FROM GV$DATABASE ORDER BY INST_ID;
+select inst_id,name,open_mode,OPEN_TIME from gv$pdbs;
+
+3.Check MRP status and lag
+
+set lines 400
+select inst_id,process,client_process,status,thread#,sequence#,block#,blocks from gv$managed_standby where PROCESS like '%MRP%'; 
+
+select arch.thread# "Thread",arch.sequence# "Last Sequence Received", appl.sequence# "Last Sequence Applied",(arch.sequence# - appl.sequence#) "Difference"
+from
+(select thread#,max(sequence#) as sequence#  from v$archived_log  where RESETLOGS_CHANGE# = (SELECT RESETLOGS_CHANGE# FROM V$DATABASE_INCARNATION  WHERE STATUS = 'CURRENT')
+and archived = 'YES' group by thread# order by thread#)arch,
+(select thread#,max(sequence#) as sequence# from v$archived_log   where RESETLOGS_CHANGE# = (SELECT RESETLOGS_CHANGE# FROM V$DATABASE_INCARNATION  WHERE STATUS = 'CURRENT')
+and applied = 'YES' group by thread# order by thread#) appl
+where arch.thread# = appl.thread#;
+
+select 'DR is Lagging Behind '||round((sysdate-max(first_time))*24,2)||' Hours' DR_LAG from v$log_history;
+
+4.Stop MRP if it is running
+
+SQL>alter database recover managed standby database cancel; 
+
+5.Shutdown All instances
+
+SQL>shutdown immediate
+
+6.Start instance 1 in mount mode
+
+SQL>startup mount
+
+7.Start manual recovery
+
+SQL> recover standby database until cancel parallel 32; 
+
+8.After the recovery is completed, start all instances in usual mode(mounted/open read only as it was before)
+
+SQL>startup mount
+
+SQL>alter database open read only;
+
+9.Start MRP
+
+SQL>alter database recover managed standby database nodelay disconnect from session; 
+
+10.Stop BO
+
+/oracle/product/OEM/emagent/agent_inst/bin/emctl stop blackout dr_recovery
